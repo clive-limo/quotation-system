@@ -4,7 +4,7 @@ import Login from '@/components/authentication/login';
 import Register from '@/components/authentication/register';
 import { MainLayout } from '@/layouts/MainLayout';
 
-const Home: FC = () => {
+const AuthenticationPage: FC = () => {
   return (
     <MainLayout>
       <section className="flex h-full w-full flex-row">
@@ -26,4 +26,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default AuthenticationPage;

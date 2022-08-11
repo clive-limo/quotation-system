@@ -1,13 +1,7 @@
 import type { FC } from 'react';
 
-import Sidebar from '@/components/home/components';
-
 const HomeModule: FC = () => {
-  return (
-    <section className="h-full w-full">
-      <Sidebar />
-    </section>
-  );
+  return <section className="h-full w-full"></section>;
 };
 
 export default HomeModule;

@@ -1,10 +1,26 @@
 import Router from 'next/router';
 import type { FC } from 'react';
+import { useState } from 'react';
 
-const Login: FC = () => {
-  const router = Router;
+interface Users {
+  userData: {
+    userId: string;
+    userEmail: string;
+    userPassword: string;
+  }[];
+}
+interface UserData {
+  userEmail: string;
+  userPassword: string;
+}
+const Login: FC<Users> = ({ userData }) => {
+  const [user, setUser] = useState<UserData>({
+    userEmail: '',
+    userPassword: '',
+  });
+
   const handleLogin = () => {
-    router.push('/home');
+    Router.push('/home');
   };
   return (
     <div className="flex flex-col">
@@ -16,6 +32,10 @@ const Login: FC = () => {
         <input
           className="mx-10 w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
           placeholder="example@gmail.com"
+          value={user.userEmail}
+          onChange={(e) => {
+            setUser({ ...user, userEmail: e.target.value });
+          }}
         />
       </div>
       <div>
@@ -23,6 +43,10 @@ const Login: FC = () => {
         <input
           className="mx-10 w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
           placeholder="*******"
+          value={user.userPassword}
+          onChange={(e) => {
+            setUser({ ...user, userPassword: e.target.value });
+          }}
         />
       </div>
       <button

@@ -1,12 +1,14 @@
 import type { FC } from 'react';
 
-import { MainLayout } from '@/layouts/MainLayout';
+import { PagesLayout } from '@/layouts/PagesLayout';
 import HomeModule from '@/modules/home_module';
 
-const Home: FC = () => (
-  <MainLayout>
-    <HomeModule />
-  </MainLayout>
-);
+const Home: FC = () => {
+  return (
+    <PagesLayout>
+      <HomeModule />
+    </PagesLayout>
+  );
+};
 
 export default Home;
