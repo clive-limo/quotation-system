@@ -5,6 +5,6 @@ export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const quotationsData = await prisma.quotations.findMany();
+  const quotationsData = await prisma.quotation.findMany();
   res.json(quotationsData);
 }

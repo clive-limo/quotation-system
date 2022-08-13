@@ -1,9 +1,7 @@
 import Link from 'next/link';
-import Router from 'next/router';
 import type { FC } from 'react';
 
 const Sidebar: FC = () => {
-  
   return (
     <section className="h-full w-[20vw] content-center bg-blue-700">
       <div className="flex flex-col py-[25vh]">

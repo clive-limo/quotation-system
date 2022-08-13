@@ -8,9 +8,9 @@ type IMainProps = {
 
 const PagesLayout: FC<IMainProps> = ({ children }) => {
   return (
-    <section className="h-[100vh] w-[100vw]">
+    <section className="flex h-[100vh] w-full flex-row">
       <Sidebar />
-      <div>{children}</div>
+      <div className="h-full w-full">{children}</div>
     </section>
   );
 };
