@@ -22,7 +22,7 @@ model User {
 model Customer {
   id            Int         @id @default(autoincrement())
   customerName  String
-  customerEmail String
+  customerEmail String      @unique
   Quotation     Quotation[]
 }
 
@@ -48,7 +48,7 @@ model Quotation {
 model Invoice {
   id          Int       @id @default(autoincrement())
   quotation   Quotation @relation(fields: [quotationId], references: [id])
-  quotationId Int
+  quotationId Int       
   dateCreated DateTime  @default(now())
   datePaid    DateTime?
 }
