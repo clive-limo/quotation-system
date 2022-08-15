@@ -17,7 +17,7 @@ const HomeModule: FC<HomeProps> = ({ customers }) => {
     <section className="h-[100] w-[100]">
       <div
         className={clsx(
-          'mx-auto my-[20vh] h-[50vh] w-[50vw] shadow-xl',
+          'mx-auto my-[20vh] h-[52vh] w-[50vw] rounded-lg border-[1px] border-gray-300 shadow-xl',
           openCreateQuote ? 'visible' : 'invisible'
         )}
       >

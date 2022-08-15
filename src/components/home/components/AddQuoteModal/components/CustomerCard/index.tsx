@@ -22,13 +22,16 @@ const CustomerCard: FC<CustomerProps> = ({
   return (
     <div
       className={clsx(
-        'm-1 w-full content-center p-2',
+        'relative m-1 flex w-full flex-row content-center rounded-md p-2',
         selected ? 'bg-blue-300' : 'bg-white'
       )}
     >
-      <p>{customerName}</p>
-      <p>{customerEmail}</p>
+      <div>
+        <p className="text-lg font-medium">{customerName}</p>
+        <p className="text-sm font-light">{customerEmail}</p>
+      </div>
       <button
+        className="absolute right-3 mx-auto rounded-md bg-blue-900 px-3 py-1 text-sm font-bold text-white"
         onClick={() => {
           setSelected(!selected);
           handleSelect({ customerName, customerEmail });
@@ -36,6 +39,7 @@ const CustomerCard: FC<CustomerProps> = ({
       >
         Select
       </button>
+      <span className="absolute bottom-1 h-[0.5px] w-[25vw] bg-gray-300" />
     </div>
   );
 };

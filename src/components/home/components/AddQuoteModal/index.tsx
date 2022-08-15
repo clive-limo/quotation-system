@@ -104,6 +104,9 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
             'Content-Type': 'application/json',
           },
           method: 'POST',
+        }).then(() => {
+          refreshData();
+          setPageNumber(1);
         });
       } catch (e) {
         console.log(e);
@@ -166,32 +169,33 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
   };
 
   return (
-    <div>
+    <div
+      className={clsx(
+        'relative h-[full] p-2',
+        visibility ? 'visible' : 'hidden'
+      )}
+    >
       <div className={clsx(pageNumber === 1 ? 'visible' : 'hidden')}>
-        <div className="relative flex w-full flex-row">
-          <h1>Create Quotation</h1>
+        <div className="relative flex h-[6vh] w-full flex-row">
+          <h1 className="mx-3 text-justify text-2xl font-bold text-gray-600">
+            Create Quotation
+          </h1>
           <button
             onClick={() => {
               setExistingUser(!existingUser);
             }}
             className={clsx(
-              'absolute right-1 rounded-md bg-blue-500 px-5 py-2 font-bold text-white'
+              'absolute right-0 mx-3 mt-4 rounded-md bg-blue-500 px-5 py-2 font-bold text-white'
             )}
           >
             {existingUser ? 'Create New Customer' : 'Select Existing Customer'}
           </button>
         </div>
 
-        <div
-          className={clsx(
-            'm-1',
-            existingUser ? 'visible' : 'hidden',
-            visibility ? 'visible' : 'hidden'
-          )}
-        >
-          <p>Select Customer</p>
-          <div className="flex flex-row">
-            <div className="m-3 h-[35vh] w-[30vw] overflow-y-auto overflow-x-hidden border-[0.5px] border-gray-400">
+        <div className={clsx(existingUser ? 'visible' : 'hidden')}>
+          <p className="mx-3 text-lg text-gray-600">Select Customer</p>
+          <div className="flex h-[35vh] flex-row">
+            <div className="m-3 h-[35vh] w-[30vw] overflow-y-auto overflow-x-hidden rounded-md border-[0.5px] border-gray-400 p-2">
               {customers.map((customer) => {
                 return (
                   <CustomerCard
@@ -208,30 +212,32 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                 );
               })}
             </div>
-            <div className="m-3 h-[35vh] w-[20vw] border-[0.5px] border-gray-400">
-              <p>Selected Customer</p>
-              <label>Name</label>
-              <p>{selectedCustomer.customerName}</p>
-              <label>Email</label>
-              <p>{selectedCustomer.customerEmail}</p>
+            <div className="m-3 h-[20vh] w-[20vw] rounded-md border-[0.5px] border-gray-400 p-3">
+              <p className="text-center text-lg font-bold text-gray-600">
+                Selected Customer
+              </p>
+              <label className="text-sm font-bold text-gray-600">Name</label>
+              <p className="text-lg font-thin">
+                {selectedCustomer.customerName}
+              </p>
+              <label className="text-sm font-bold text-gray-600">Email</label>
+              <p className="text-lg font-thin">
+                {selectedCustomer.customerEmail}
+              </p>
             </div>
           </div>
         </div>
 
-        <div
-          className={clsx(
-            'm-1',
-            existingUser ? 'hidden' : 'visible',
-            visibility ? 'visible' : 'hidden'
-          )}
-        >
-          <p>Create User</p>
+        <div className={clsx('m-1', existingUser ? 'hidden' : 'visible')}>
+          <p className="mx-3 text-lg text-gray-600">Create Customer</p>
           <div>
-            <div>
-              <label>Customer Name</label>
+            <div className="px-6 pt-4">
+              <label className="text-sm font-bold text-gray-500">
+                Customer Name
+              </label>
               <input
-                className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
-                placeholder="Customer Name"
+                className="w-full rounded-sm border-[1px] border-gray-600 px-5 py-2 text-[18px]"
+                placeholder="John Doe"
                 type="text"
                 value={newCustomer.customerName}
                 onChange={(e) =>
@@ -242,11 +248,13 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                 }
               />
             </div>
-            <div>
-              <label>Customer Email</label>
+            <div className="px-6 pt-1">
+              <label className="text-sm font-bold text-gray-500">
+                Customer Email
+              </label>
               <input
-                className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
-                placeholder="Customer Email"
+                className="w-full rounded-sm border-[1px] border-gray-600 px-5 py-2 text-[18px]"
+                placeholder="johndoe@gmail.com"
                 type="text"
                 value={newCustomer.customerEmail}
                 onChange={(e) =>
@@ -258,6 +266,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
               />
             </div>
             <button
+              className="m-5 rounded-md bg-blue-500 px-5 py-1 font-bold text-white"
               onClick={() =>
                 handleAddCustomer({
                   customerName: newCustomer.customerName,
@@ -272,57 +281,62 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
       </div>
 
       <div className={clsx('m-1 p-1', pageNumber === 2 ? 'visible' : 'hidden')}>
-        <p>Quotation Details</p>
+        <div className="h-[14vh]">
+          <p className="px-3 text-2xl font-bold text-gray-600">
+            Quotation Details
+          </p>
+          <div className="mb-2 flex flex-row p-1">
+            <div className="mx-2 my-1 flex flex-col">
+              <label>Item Name</label>
+              <input
+                placeholder="Enter item name"
+                value={newItem.itemName}
+                onChange={(e) =>
+                  setNewItem({ ...newItem, itemName: e.target.value })
+                }
+                className="rounded-md border-[1px] border-black p-1"
+              />
+            </div>
+            <div className="m-1 flex flex-col">
+              <label>Item Quantity</label>
+              <input
+                type="number"
+                placeholder="Number of items"
+                value={newItem.itemQuantity}
+                onChange={(e) =>
+                  setNewItem({ ...newItem, itemQuantity: +e.target.value })
+                }
+                className="rounded-md border-[1px] border-black p-1"
+              />
+            </div>
+            <div className="m-1 flex flex-col">
+              <label>Item Price</label>
+              <input
+                type="number"
+                placeholder="Price per unit"
+                value={newItem.itemPrice}
+                onChange={(e) =>
+                  setNewItem({ ...newItem, itemPrice: +e.target.value })
+                }
+                className="rounded-md border-[1px] border-black p-1"
+              />
+            </div>
 
-        <div className="flex flex-row p-1">
-          <div className="m-1 flex flex-col">
-            <label>Item Name</label>
-            <input
-              placeholder="Enter item name"
-              value={newItem.itemName}
-              onChange={(e) =>
-                setNewItem({ ...newItem, itemName: e.target.value })
-              }
-              className="rounded-md border-[1px] border-black p-1"
-            />
+            <button
+              onClick={() => handleAddItem()}
+              className="mt-6 h-[40px] flex-1 rounded-md bg-blue-400 font-bold text-white"
+            >
+              Add
+            </button>
           </div>
-          <div className="m-1 flex flex-col">
-            <label>Item Quantity</label>
-            <input
-              type="number"
-              placeholder="Number of items"
-              value={newItem.itemQuantity}
-              onChange={(e) =>
-                setNewItem({ ...newItem, itemQuantity: +e.target.value })
-              }
-              className="rounded-md border-[1px] border-black p-1"
-            />
-          </div>
-          <div className="m-1 flex flex-col">
-            <label>Item Price</label>
-            <input
-              type="number"
-              placeholder="Price per unit"
-              value={newItem.itemPrice}
-              onChange={(e) =>
-                setNewItem({ ...newItem, itemPrice: +e.target.value })
-              }
-              className="rounded-md border-[1px] border-black p-1"
-            />
-          </div>
-
-          <button
-            onClick={() => handleAddItem()}
-            className="my-auto h-[40px] w-[100px] rounded-md bg-blue-400 font-bold text-white"
-          >
-            Add
-          </button>
         </div>
-        <div className="flex flex-row">
-          <div className="h-[30vh] w-[30vw] overflow-y-auto rounded-md border-[1px] border-gray-200">
-            <p className="fixed m-2 h-4">Quotation Items</p>
+        <div className="flex h-[28vh] flex-row pl-3 pr-1">
+          <div className="w-[28vw] overflow-y-auto rounded-md border-[1px] border-gray-500 bg-white p-1">
+            <p className="fixed h-4 bg-white px-3 text-lg font-bold text-gray-600">
+              Quotation Items
+            </p>
             <div>
-              <span className="m-3 h-4" />
+              <span className="m-4 h-5" />
               {items ? (
                 items.map((item) => {
                   if (item.itemPrice === 0) {
@@ -342,53 +356,77 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
               )}
             </div>
           </div>
-          <div className="ml-2 h-[30vh] w-[20vw] overflow-y-auto rounded-md border-[1px] border-gray-200">
-            <div>
-              <label>Total</label>
-              <p>{sum}</p>
+          <div className="ml-4 flex h-[12vh] w-[20vw] flex-row rounded-md border-[1px] border-gray-500">
+            <label className="my-auto h-4 bg-white pl-3 pr-2 text-xl font-bold text-gray-600">
+              Total:
+            </label>
+            <div className="my-auto flex flex-row">
+              <p className="text-4xl font-thin text-blue-500">
+                {sum.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'Ksh',
+                  minimumFractionDigits: 2,
+                })}
+              </p>
             </div>
           </div>
         </div>
       </div>
 
       <div className={clsx(pageNumber === 3 ? 'visible' : 'hidden')}>
-        <p>Confirm Details</p>
+        <p className="m-2 px-3 py-5 text-center text-2xl font-bold text-gray-600">
+          Confirm Details
+        </p>
         <div className="flex flex-row">
-          <div className="flex flex-1 flex-row">
-            <p className="font-bold">Customer Name: </p>
-            <p>{selectedCustomer.customerName}</p>
+          <div className="ml-3 mr-1 flex flex-1 flex-row rounded-md border-[1px] border-gray-500 p-3">
+            <p className="my-auto pr-2 text-sm font-bold text-gray-500">
+              Customer Name:{' '}
+            </p>
+            <p className="text-2xl font-light">
+              {selectedCustomer.customerName}
+            </p>
           </div>
-          <div className="flex flex-1 flex-row">
-            <p className="font-bold">Customer Email: </p>
-            <p>{selectedCustomer.customerEmail}</p>
+          <div className="ml-1 mr-3 flex flex-1 flex-row rounded-md border-[1px] border-gray-500 p-3">
+            <p className="my-auto pr-2 text-sm font-bold text-gray-500">
+              Customer Email:{' '}
+            </p>
+            <p className="text-2xl font-light">
+              {selectedCustomer.customerEmail}
+            </p>
           </div>
         </div>
-        <div>
-          <p>Quotation Details</p>
-          <div>
-            <div className="flex flex-row">
-              <p className="font-bold">Number of Items: </p>
-              <p>{items.length}</p>
+        <div className="mb-5">
+          <p className="p-3 text-lg font-bold text-gray-600">
+            Quotation Details
+          </p>
+          <div className="mx-3 flex flex-row">
+            <div className="mr-1 flex flex-1 flex-row rounded-md border-[1px] border-gray-500 p-2">
+              <p className="my-auto pr-2 text-sm font-bold text-gray-500">
+                Number of Items:{' '}
+              </p>
+              <p className="text-2xl font-light">{items.length}</p>
             </div>
-            <div className="flex flex-row">
-              <p className="font-bold">Quotation Total: </p>
-              <p>{sum}</p>
+            <div className="ml-1 flex flex-1 flex-row rounded-md border-[1px] border-gray-500 p-2">
+              <p className="my-auto pr-2 text-sm font-bold text-gray-500">
+                Quotation Total:{' '}
+              </p>
+              <p className="text-2xl font-light">{sum}</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div>
-        <div className="relative bottom-0 flex w-full flex-row">
+      <div className="ml-3 mr-2 h-[10vh]">
+        <div className="relative flex  flex-row">
           <button
-            className="absolute right-1 rounded-md bg-blue-500 px-5 py-2 font-bold text-white"
+            className="absolute  right-1 my-auto rounded-md bg-blue-500 px-5 py-2 font-bold text-white"
             onClick={() => handleNextPage('add')}
           >
             Next
           </button>
           <button
             className={clsx(
-              'absolute left-1 rounded-md bg-blue-500 px-5 py-2 font-bold text-white',
+              'absolute  left-1 rounded-md bg-blue-500 px-5 py-2 font-bold text-white',
               pageNumber === 1 ? 'hidden' : 'visible'
             )}
             onClick={() => handleNextPage('subtract')}
