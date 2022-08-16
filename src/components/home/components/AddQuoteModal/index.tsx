@@ -177,7 +177,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
     >
       <div className={clsx(pageNumber === 1 ? 'visible' : 'hidden')}>
         <div className="relative flex h-[6vh] w-full flex-row">
-          <h1 className="mx-3 text-justify text-2xl font-bold text-gray-600">
+          <h1 className="mx-3 pl-6 text-justify text-2xl font-bold text-gray-600">
             Create Quotation
           </h1>
           <button
@@ -282,9 +282,9 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
 
       <div className={clsx('m-1 p-1', pageNumber === 2 ? 'visible' : 'hidden')}>
         <div className="h-[14vh]">
-          <p className="px-3 text-2xl font-bold text-gray-600">
+          <h1 className="px-3 pl-6 text-2xl font-bold text-gray-600">
             Quotation Details
-          </p>
+          </h1>
           <div className="mb-2 flex flex-row p-1">
             <div className="mx-2 my-1 flex flex-col">
               <label>Item Name</label>
