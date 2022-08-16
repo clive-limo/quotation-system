@@ -19,17 +19,18 @@ interface HomeProps {
       customerName: string;
       customerEmail: string;
     };
-    quoteItems: {
-      id: number;
-      itemName: string;
-      itemQuantity: number;
-      itemPrice: number;
-    };
-    dateCreated: Date;
-    dateApproved: Date;
+    dateCreated: string;
+    dateApproved: string;
+  }[];
+  items: {
+    id: number;
+    itemName: string;
+    itemQuantity: number;
+    itemPrice: number;
+    quotationId: number;
   }[];
 }
-const HomeModule: FC<HomeProps> = ({ customers, quotations }) => {
+const HomeModule: FC<HomeProps> = ({ customers, quotations, items }) => {
   const [openCreateQuote, setOpenCreateQuote] = useState(false);
   return (
     <section className="relative h-[100] w-[100]">
@@ -74,7 +75,7 @@ const HomeModule: FC<HomeProps> = ({ customers, quotations }) => {
           <input placeholder="Search" className="p-2" />
         </div>
       </div>
-      <RecordTable />
+      <RecordTable quotations={quotations} items={items} />
     </section>
   );
 };

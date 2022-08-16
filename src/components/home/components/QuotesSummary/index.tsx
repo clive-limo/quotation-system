@@ -13,13 +13,14 @@ interface SummaryProps {
       itemName: string;
       itemQuantity: number;
       itemPrice: number;
-    };
+    }[];
     dateCreated: Date;
     dateApproved: Date;
+    customerId: number;
   }[];
 }
 
-const QuotesSummary: FC<SummaryProps> = ({ quotations }) => {
+const QuotesSummary: FC = () => {
   return (
     <div className="flex h-[18vh] flex-row">
       <div className="ml-10 mr-3 flex flex-1 flex-row rounded-lg border-[1px] border-gray-400 p-2">

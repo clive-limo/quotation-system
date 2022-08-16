@@ -18,20 +18,21 @@ interface HomeProps {
       customerName: string;
       customerEmail: string;
     };
-    quoteItems: {
-      id: number;
-      itemName: string;
-      itemQuantity: number;
-      itemPrice: number;
-    };
-    dateCreated: Date;
-    dateApproved: Date;
+    dateCreated: string;
+    dateApproved: string;
+  }[];
+  items: {
+    id: number;
+    itemName: string;
+    itemQuantity: number;
+    itemPrice: number;
+    quotationId: number;
   }[];
 }
-const Home: FC<HomeProps> = ({ customers, quotations }) => {
+const Home: FC<HomeProps> = ({ customers, quotations, items }) => {
   return (
     <PagesLayout>
-      <HomeModule customers={customers} quotations={quotations} />
+      <HomeModule customers={customers} quotations={quotations} items={items} />
     </PagesLayout>
   );
 };
@@ -73,10 +74,13 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   });
 
+  const items = await prisma.items.findMany();
+
   return {
     props: {
-      customers: { customers },
-      quotations: { quotations },
+      customers,
+      quotations: JSON.parse(JSON.stringify(quotations)),
+      items,
     },
   };
 };
