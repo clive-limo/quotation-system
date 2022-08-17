@@ -20,7 +20,17 @@ const Login: FC<Users> = ({ userData }) => {
   });
 
   const handleLogin = () => {
-    Router.push('/home');
+    userData.map((dbUser) => {
+      if (dbUser.userEmail === user.userEmail) {
+        if (dbUser.userPassword === user.userPassword) {
+          return Router.push('/home');
+        }
+        setUser({ ...user, userEmail: '', userPassword: '' });
+        return false;
+      }
+      setUser({ ...user, userEmail: '', userPassword: '' });
+      return false;
+    });
   };
   return (
     <div className="flex flex-col">

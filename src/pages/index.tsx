@@ -1,10 +1,19 @@
+import type { GetServerSideProps } from 'next';
 import type { FC } from 'react';
 
 import Login from '@/components/authentication/login';
 import Register from '@/components/authentication/register';
 import { MainLayout } from '@/layouts/MainLayout';
 
-const AuthenticationPage: FC = () => {
+interface UserProps {
+  userData: {
+    userId: string;
+    userEmail: string;
+    userPassword: string;
+  }[];
+}
+
+const AuthenticationPage: FC<UserProps> = ({ userData }) => {
   return (
     <MainLayout>
       <section className="flex h-full w-full flex-row">
@@ -18,7 +27,7 @@ const AuthenticationPage: FC = () => {
           />
         </div>
         <div className="flex flex-col">
-          <Login />
+          <Login userData={userData} />
           <Register />
         </div>
       </section>
@@ -27,3 +36,13 @@ const AuthenticationPage: FC = () => {
 };
 
 export default AuthenticationPage;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const userData = await prisma?.user.findMany({});
+
+  return {
+    props: {
+      userData,
+    },
+  };
+};
