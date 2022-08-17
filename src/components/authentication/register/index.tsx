@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useState } from 'react';
 
@@ -18,29 +19,33 @@ const Register: FC = () => {
     userId: '',
   });
 
-  async function createUser(data: UserData) {
+  const router = useRouter();
+
+  async function createUser(userData: UserData) {
     try {
-      fetch('http://localhost:3000/api/create_user', {
-        body: JSON.stringify(data),
+      fetch('http://localhost:3000/api/users/create_user', {
+        body: JSON.stringify({ userData }),
         headers: {
           'Content-Type': 'application/json',
         },
         method: 'POST',
-      }).then(() =>
+      }).then(() => {
         setNewUser({
           userEmail: '',
           userPassword: '',
           userConfirmPassword: '',
           userStatus: true,
           userId: '',
-        })
-      );
+        });
+        router.push('/home');
+      });
     } catch (error) {
       console.log(error);
     }
   }
 
   const handleSubmit = async (data: UserData) => {
+    console.log('CLICKED');
     try {
       createUser(data);
     } catch (error) {

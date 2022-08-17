@@ -5,14 +5,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { userEmail, userPassword, userStatus } = req.body;
-
+  const { userData } = req.body;
   try {
     await prisma.user.create({
       data: {
-        userEmail,
-        userPassword,
-        userStatus,
+        userEmail: userData.userEmail,
+        userPassword: userData.userPassword,
+        userStatus: userData.userStatus,
       },
     });
     res.status(200).json({ message: 'User Created' });

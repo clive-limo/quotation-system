@@ -1,3 +1,4 @@
+import { prisma } from 'lib/prisma';
 import type { GetServerSideProps } from 'next';
 import type { FC } from 'react';
 
@@ -42,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      userData,
+      userData: JSON.parse(JSON.stringify(userData)),
     },
   };
 };
