@@ -74,13 +74,16 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
 
   const handleAddCustomer = async (customer: CustomerDetails) => {
     try {
-      await fetch('http://localhost:3000/api/customers/addCustomer', {
-        body: JSON.stringify({ customer }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      }).then(() => {
+      await fetch(
+        'https://chemtron-quotation-system.vercel.app/api/customers/addCustomer',
+        {
+          body: JSON.stringify({ customer }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+        }
+      ).then(() => {
         setNewCustomer({ customerName: '', customerEmail: '' });
         refreshData();
       });
@@ -94,17 +97,20 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
   ) => {
     addItems.forEach(async (item) => {
       try {
-        await fetch('http://localhost:3000/api/quotations/createQuoteItems', {
-          body: JSON.stringify({
-            itemName: item.itemName,
-            itemPrice: item.itemPrice,
-            itemQuantity: item.itemQuantity,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'POST',
-        }).then(() => {
+        await fetch(
+          'https://chemtron-quotation-system.vercel.app/api/quotations/createQuoteItems',
+          {
+            body: JSON.stringify({
+              itemName: item.itemName,
+              itemPrice: item.itemPrice,
+              itemQuantity: item.itemQuantity,
+            }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            method: 'POST',
+          }
+        ).then(() => {
           refreshData();
           setPageNumber(1);
         });
@@ -116,13 +122,16 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
 
   const handleCreateQuotation = async (quoteDetails: AddQuoteProps) => {
     try {
-      await fetch('http://localhost:3000/api/quotations/createQuotation', {
-        body: JSON.stringify({ quoteDetails }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      }).then(() => {
+      await fetch(
+        'https://chemtron-quotation-system.vercel.app/api/quotations/createQuotation',
+        {
+          body: JSON.stringify({ quoteDetails }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+        }
+      ).then(() => {
         handleItems(quoteDetails.quoteItems);
         refreshData();
       });

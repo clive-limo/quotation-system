@@ -27,13 +27,16 @@ const RecordCard: FC<RecordDetailProps> = ({
     // TODO: Click animation
     console.log('UPDATE');
     try {
-      await fetch('http://localhost:3000/api/quotations/updateQuotation', {
-        body: JSON.stringify({ quoteId }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      }).then(() => {
+      await fetch(
+        'https://chemtron-quotation-system.vercel.app/api/quotations/updateQuotation',
+        {
+          body: JSON.stringify({ quoteId }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+        }
+      ).then(() => {
         refreshData();
       });
     } catch (error) {
@@ -45,13 +48,16 @@ const RecordCard: FC<RecordDetailProps> = ({
     // TODO: Click animation
     console.log('DELETE');
     try {
-      await fetch('http://localhost:3000/api/quotations/deleteQuotation', {
-        body: JSON.stringify({ quoteId }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'DELETE',
-      }).then(() => {
+      await fetch(
+        'https://chemtron-quotation-system.vercel.app/api/quotations/deleteQuotation',
+        {
+          body: JSON.stringify({ quoteId }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'DELETE',
+        }
+      ).then(() => {
         refreshData();
       });
     } catch (error) {

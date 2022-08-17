@@ -23,13 +23,16 @@ const Register: FC = () => {
 
   async function createUser(userData: UserData) {
     try {
-      fetch('http://localhost:3000/api/users/create_user', {
-        body: JSON.stringify({ userData }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-      }).then(() => {
+      fetch(
+        'https://chemtron-quotation-system.vercel.app//api/users/create_user',
+        {
+          body: JSON.stringify({ userData }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          method: 'POST',
+        }
+      ).then(() => {
         setNewUser({
           userEmail: '',
           userPassword: '',
