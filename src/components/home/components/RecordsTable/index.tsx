@@ -11,7 +11,7 @@ interface RecordsProps {
       customerEmail: string;
     };
     dateCreated: string;
-    dateApproved: string;
+    quoteStatus: boolean;
   }[];
   items: {
     id: number;
@@ -26,11 +26,17 @@ const RecordTable: FC<RecordsProps> = ({ quotations, items }) => {
   return (
     <div className="mx-10 mt-3 rounded-lg border-[1px] border-gray-400">
       <div className="flex flex-row rounded-lg bg-gray-400 p-3">
-        <p className="flex-1 text-center font-semibold text-blue-500">CUSTOMER</p>
-        <p className="flex-1 text-center">AMOUNT</p>
-        <p className="flex-1 text-center">DATE CREATED</p>
-        <p className="flex-1 text-center">DATE APPROVED</p>
-        <p className="flex-[0.7] text-center">ACTIONS</p>
+        <p className="flex-1 text-center font-semibold text-blue-500">
+          CUSTOMER
+        </p>
+        <p className="flex-1 text-center font-semibold text-blue-500">AMOUNT</p>
+        <p className="flex-1 text-center font-semibold text-blue-500">
+          DATE CREATED
+        </p>
+        <p className="flex-1 text-center font-semibold text-blue-500">STATUS</p>
+        <p className="flex-[0.7] text-center font-semibold text-blue-500">
+          ACTIONS
+        </p>
       </div>
       <div className="my-1 h-[45vh] overflow-y-auto p-1">
         {quotations.map((quote) => {
@@ -47,9 +53,10 @@ const RecordTable: FC<RecordsProps> = ({ quotations, items }) => {
           return (
             <RecordCard
               key={quote.id}
+              id={quote.id}
               customerName={quote.customer.customerName}
               createDate={quote.dateCreated}
-              approvedDate={quote.dateApproved}
+              approvalStatus={quote.quoteStatus}
               quoteTotal={total.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'KSH',

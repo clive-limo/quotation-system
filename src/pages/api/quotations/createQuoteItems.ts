@@ -1,11 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from 'lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const prisma = new PrismaClient();
   const { itemName, itemPrice, itemQuantity } = req.body;
 
   const quoteIdAll = await prisma.quotation.findMany({

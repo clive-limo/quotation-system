@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from 'lib/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handle(
@@ -6,7 +6,6 @@ export default async function handle(
   res: NextApiResponse
 ) {
   const { customer } = req.body;
-  const prisma = new PrismaClient();
 
   try {
     await prisma.customer.create({

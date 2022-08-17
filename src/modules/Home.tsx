@@ -20,7 +20,7 @@ interface HomeProps {
       customerEmail: string;
     };
     dateCreated: string;
-    dateApproved: string;
+    quoteStatus: boolean;
   }[];
   items: {
     id: number;
@@ -58,7 +58,7 @@ const HomeModule: FC<HomeProps> = ({ customers, quotations, items }) => {
           Summary
         </p>
       </div>
-      <QuotesSummary />
+      <QuotesSummary quotations={quotations} items={items} />
       <div className="mx-10 my-4 flex h-[7vh] flex-row">
         <p className="my-auto flex-1 text-2xl font-normal text-gray-600">
           Records

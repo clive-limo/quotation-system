@@ -40,7 +40,7 @@ model Quotation {
   customer       Customer  @relation(references: [id], fields: [customerId])
   quotationItems Items[]
   dateCreated    DateTime  @default(now())
-  dateApproved   DateTime?
+  quoteStatus    Boolean @default(false)
   invoice        Invoice[]
   customerId     Int
 }
@@ -48,7 +48,8 @@ model Quotation {
 model Invoice {
   id          Int       @id @default(autoincrement())
   quotation   Quotation @relation(fields: [quotationId], references: [id])
-  quotationId Int       
+  quotationId Int
+  status Int       
   dateCreated DateTime  @default(now())
-  datePaid    DateTime?
+  datePaid    DateTime? @updatedAt
 }

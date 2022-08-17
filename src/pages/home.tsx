@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from 'lib/prisma';
 import type { GetServerSideProps } from 'next';
 import type { FC } from 'react';
 
@@ -19,7 +19,7 @@ interface HomeProps {
       customerEmail: string;
     };
     dateCreated: string;
-    dateApproved: string;
+    quoteStatus: boolean;
   }[];
   items: {
     id: number;
@@ -40,7 +40,6 @@ const Home: FC<HomeProps> = ({ customers, quotations, items }) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const prisma = new PrismaClient();
   const customers = await prisma.customer.findMany({
     select: {
       id: false,
@@ -68,7 +67,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
         },
       },
       dateCreated: true,
-      dateApproved: true,
+      quoteStatus: true,
       invoice: false,
       customerId: false,
     },
