@@ -1,4 +1,4 @@
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useState } from 'react';
 
@@ -15,13 +15,30 @@ interface UserData {
 }
 const Login: FC<Users> = () => {
   const [user, setUser] = useState<UserData>({
-    userEmail: '',
-    userPassword: '',
+    userEmail: 'testuser@gmail.com',
+    userPassword: 'test1234',
   });
+  const router = useRouter();
 
-  const handleLogin = () => {
-    Router.push('/home');
+  const handleLogin = async (userData: UserData) => {
+    const email = userData.userEmail;
+    const password = userData.userPassword;
+
+    const res = await fetch('/api/auth/authenticate', {
+      body: JSON.stringify({ email, password }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    }).then((t) => t.json());
+
+    const { token } = res;
+
+    if (token) {
+      router.push('/home');
+    }
   };
+
   return (
     <div className="flex flex-col">
       <h1 className="mx-10 mt-10 mb-2 text-justify text-[30px] font-semibold">
@@ -52,7 +69,7 @@ const Login: FC<Users> = () => {
       </div>
       <button
         className="m-10 h-[40px] w-full rounded-sm bg-blue-700 text-center text-[20px] font-semibold text-white hover:bg-blue-900"
-        onClick={() => handleLogin()}
+        onClick={() => handleLogin(user)}
       >
         Next
       </button>

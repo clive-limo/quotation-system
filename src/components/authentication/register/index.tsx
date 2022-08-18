@@ -23,16 +23,13 @@ const Register: FC = () => {
 
   async function createUser(userData: UserData) {
     try {
-      fetch(
-        'https://chemtron-quotation-system.vercel.app//api/users/create_user',
-        {
-          body: JSON.stringify({ userData }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'POST',
-        }
-      ).then(() => {
+      fetch('/api/users/create_user', {
+        body: JSON.stringify({ userData }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      }).then(() => {
         setNewUser({
           userEmail: '',
           userPassword: '',
@@ -74,6 +71,7 @@ const Register: FC = () => {
         <p className="mx-10  py-1 text-[18px]">PASSWORD</p>
         <input
           className="mx-10 w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          type="password"
           placeholder="*******"
           value={newUser.userPassword}
           onChange={(e) =>
@@ -85,6 +83,7 @@ const Register: FC = () => {
         <p className="mx-10  py-1 text-[18px]">CONFIRM PASSWORD</p>
         <input
           className="mx-10 w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          type="password"
           placeholder="*******"
           value={newUser.userConfirmPassword}
           onChange={(e) =>
