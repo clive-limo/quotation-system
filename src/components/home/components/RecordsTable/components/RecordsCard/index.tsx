@@ -27,16 +27,13 @@ const RecordCard: FC<RecordDetailProps> = ({
     // TODO: Click animation
     console.log('UPDATE');
     try {
-      await fetch(
-        'https://chemtron-quotation-system.vercel.app/api/quotations/updateQuotation',
-        {
-          body: JSON.stringify({ quoteId }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'POST',
-        }
-      ).then(() => {
+      await fetch('/api/quotations/updateQuotation', {
+        body: JSON.stringify({ quoteId }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      }).then(() => {
         refreshData();
       });
     } catch (error) {
@@ -48,16 +45,13 @@ const RecordCard: FC<RecordDetailProps> = ({
     // TODO: Click animation
     console.log('DELETE');
     try {
-      await fetch(
-        'https://chemtron-quotation-system.vercel.app/api/quotations/deleteQuotation',
-        {
-          body: JSON.stringify({ quoteId }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          method: 'DELETE',
-        }
-      ).then(() => {
+      await fetch('/api/quotations/deleteQuotation', {
+        body: JSON.stringify({ quoteId }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'DELETE',
+      }).then(() => {
         refreshData();
       });
     } catch (error) {
@@ -76,7 +70,7 @@ const RecordCard: FC<RecordDetailProps> = ({
   };
 
   return (
-    <div className="my-1 flex h-[15%] flex-row rounded-lg border-[1px] border-gray-500 ">
+    <div className="my-1 flex h-[20%] flex-row rounded-lg border-[1px] border-gray-500 ">
       <div className="flex flex-[3] flex-row">
         <p className="my-auto flex-1 text-center">{customerName}</p>
         <p className="my-auto flex-1 text-center text-blue-500">{quoteTotal}</p>

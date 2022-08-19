@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import CustomerCard from './components/CustomerCard';
 import ItemsCard from './components/ItemsCard';
@@ -45,6 +45,8 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
     customerEmail: '',
   });
 
+  const [clicked, setClicked] = useState(false);
+
   const [selectedCustomer, setSelectedCustomer] = useState<CustomerDetails>({
     customerName: 'none',
     customerEmail: 'none',
@@ -73,6 +75,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
   }, 0);
 
   const handleAddCustomer = async (customer: CustomerDetails) => {
+    setClicked(true);
     try {
       await fetch('/api/customers/addCustomer', {
         body: JSON.stringify({ customer }),
@@ -82,11 +85,29 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
         method: 'POST',
       }).then(() => {
         setNewCustomer({ customerName: '', customerEmail: '' });
+        setClicked(false);
+        setSelectedCustomer({
+          ...selectedCustomer,
+          customerEmail: newCustomer.customerEmail,
+          customerName: newCustomer.customerName,
+        });
+        setPageNumber(pageNumber + 1);
         refreshData();
       });
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleClearState = () => {
+    setSelectedCustomer({
+      ...selectedCustomer,
+      customerEmail: 'None',
+      customerName: 'None',
+    });
+    setNewCustomer({ ...newCustomer, customerEmail: '', customerName: '' });
+    setExistingUser(true);
+    updateItems(() => []);
   };
 
   const handleItems = async (
@@ -106,6 +127,8 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
           method: 'POST',
         }).then(() => {
           refreshData();
+          setClicked(false);
+          handleClearState();
           setPageNumber(1);
         });
       } catch (e) {
@@ -149,6 +172,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
       if (pageNumber < 3) {
         setPageNumber(pageNumber + 1);
       } else if (pageNumber === 3) {
+        setClicked(true);
         handleCreateQuotation({
           customer: {
             customerName: selectedCustomer.customerName,
@@ -164,9 +188,14 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
 
   const handleAddItem = () => {
     updateItems((arr) => [...arr, newItem]);
-    console.log(items);
     setNewItem({ itemName: '', itemPrice: 0, itemQuantity: 0 });
   };
+
+  useEffect(() => {
+    if (!visibility) {
+      handleClearState();
+    }
+  });
 
   return (
     <div
@@ -207,6 +236,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                     key={customer.customerName}
                     customerName={customer.customerName}
                     customerEmail={customer.customerEmail}
+                    selectedCustomer={selectedCustomer.customerName}
                     handleSelect={() => {
                       handleSelectedCustomer(
                         customer.customerName,
@@ -271,7 +301,10 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
               />
             </div>
             <button
-              className="m-5 rounded-md bg-blue-500 px-5 py-1 font-bold text-white"
+              className={clsx(
+                'mx-6 mt-3 w-[20%] rounded-md bg-blue-500 px-5 font-bold text-white',
+                clicked ? 'bg-gray-50 px-10 py-2 shadow-lg' : 'bg-blue-500 py-2'
+              )}
               onClick={() =>
                 handleAddCustomer({
                   customerName: newCustomer.customerName,
@@ -279,7 +312,18 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                 })
               }
             >
-              Add User
+              {' '}
+              {clicked ? (
+                <img
+                  className="mx-auto"
+                  src="/assets/icons/loading.gif"
+                  alt="loading gif"
+                  height={25}
+                  width={25}
+                />
+              ) : (
+                'Add User'
+              )}
             </button>
           </div>
         </div>
@@ -374,7 +418,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                 {sum.toLocaleString('en-US', {
                   style: 'currency',
                   currency: 'Ksh',
-                  minimumFractionDigits: 2,
+                  minimumFractionDigits: 0,
                 })}
               </p>
             </div>
@@ -382,11 +426,11 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
         </div>
       </div>
 
-      <div className={clsx(pageNumber === 3 ? 'visible' : 'hidden')}>
-        <p className="m-2 px-3 py-5 text-center text-2xl font-bold text-gray-600">
+      <div className={clsx('h-[90%]', pageNumber === 3 ? 'visible' : 'hidden')}>
+        <p className="m-2 h-[10%] px-3 text-center text-2xl font-bold text-gray-600">
           Confirm Details
         </p>
-        <div className="flex flex-row">
+        <div className="flex h-[20%] flex-row">
           <div className="ml-3 mr-1 flex flex-1 flex-row rounded-md border-[1px] border-gray-500 p-3">
             <p className="my-auto pr-2 text-sm font-bold text-gray-500">
               Customer Name:{' '}
@@ -404,22 +448,41 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
             </p>
           </div>
         </div>
-        <div className="mb-5">
-          <p className="p-3 text-lg font-bold text-gray-600">
+        <div className="mb-5 h-[50%]">
+          <p className="h-[20%] p-3 text-lg font-bold text-gray-600">
             Quotation Details
           </p>
-          <div className="mx-3 flex flex-row">
-            <div className="mr-1 flex flex-1 flex-row rounded-md border-[1px] border-gray-500 p-2">
-              <p className="my-auto pr-2 text-sm font-bold text-gray-500">
-                Number of Items:{' '}
-              </p>
-              <p className="text-2xl font-light">{items.length}</p>
+          <div className="mx-3 flex h-[100%] flex-row">
+            <div className="mr-1 flex h-full flex-1 flex-col overflow-y-auto rounded-md border-[1px] border-gray-500 p-2">
+              {items ? (
+                items.map((item) => {
+                  if (item.itemPrice === 0) {
+                    return false;
+                  }
+                  return (
+                    <ItemsCard
+                      key={item.itemName}
+                      name={item.itemName}
+                      quantity={item.itemQuantity}
+                      price={item.itemPrice}
+                    />
+                  );
+                })
+              ) : (
+                <p>none</p>
+              )}
             </div>
-            <div className="ml-1 flex flex-1 flex-row rounded-md border-[1px] border-gray-500 p-2">
+            <div className="ml-1 flex h-[50%] flex-1 flex-row rounded-md border-[1px] border-gray-500 p-2">
               <p className="my-auto pr-2 text-sm font-bold text-gray-500">
                 Quotation Total:{' '}
               </p>
-              <p className="text-2xl font-light">{sum}</p>
+              <p className="my-auto text-2xl font-light text-blue-500">
+                {sum.toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'Ksh',
+                  minimumFractionDigits: 0,
+                })}
+              </p>
             </div>
           </div>
         </div>
@@ -428,10 +491,24 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
       <div className="h-[10%] w-full">
         <div className="relative flex  flex-row">
           <button
-            className="absolute  right-1 my-auto rounded-md bg-blue-500 px-5 py-2 font-bold text-white"
+            className={clsx(
+              'absolute right-1  my-auto w-[20%] rounded-md bg-blue-500 px-5 font-bold text-white',
+              clicked ? 'bg-gray-50 px-10 py-2 shadow-lg' : 'bg-blue-500 py-2'
+            )}
             onClick={() => handleNextPage('add')}
           >
-            Next
+            {' '}
+            {clicked ? (
+              <img
+                className="mx-auto"
+                src="/assets/icons/loading.gif"
+                alt="loading gif"
+                height={25}
+                width={25}
+              />
+            ) : (
+              'Next'
+            )}
           </button>
           <button
             className={clsx(

@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import type { FC } from 'react';
-import { useState } from 'react';
 
 interface CustomerDetails {
   customerName: string;
@@ -10,20 +9,21 @@ interface CustomerDetails {
 interface CustomerProps {
   customerName: string;
   customerEmail: string;
+  selectedCustomer: string;
   handleSelect: ({ customerName, customerEmail }: CustomerDetails) => void;
 }
 
 const CustomerCard: FC<CustomerProps> = ({
   customerName,
   customerEmail,
+  selectedCustomer,
   handleSelect,
 }) => {
-  const [selected, setSelected] = useState(false);
   return (
     <div
       className={clsx(
         'relative m-1 flex w-full flex-row content-center rounded-md p-2',
-        selected ? 'bg-blue-300' : 'bg-white'
+        selectedCustomer === customerName ? 'bg-blue-300' : 'bg-white'
       )}
     >
       <div>
@@ -33,7 +33,6 @@ const CustomerCard: FC<CustomerProps> = ({
       <button
         className="absolute right-3 mx-auto rounded-md bg-blue-900 px-3 py-1 text-sm font-bold text-white"
         onClick={() => {
-          setSelected(!selected);
           handleSelect({ customerName, customerEmail });
         }}
       >
