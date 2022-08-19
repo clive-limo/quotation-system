@@ -53,12 +53,12 @@ const Register: FC = () => {
     }
   };
   return (
-    <div className="flex flex-col">
-      <h1 className="mx-10 text-justify text-[30px] font-semibold">REGISTER</h1>
-      <div>
-        <p className="mx-10  py-1 text-[18px]">EMAIL</p>
+    <div className="flex w-full flex-col p-1 md:p-3">
+      <h1 className="mx-7 text-justify text-[30px] font-semibold">REGISTER</h1>
+      <div className="w-full">
+        <p className="py-1 text-[18px]">EMAIL</p>
         <input
-          className="mx-10 w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
           placeholder="example@gmail.com"
           type="text"
           value={newUser.userEmail}
@@ -67,10 +67,10 @@ const Register: FC = () => {
           }
         />
       </div>
-      <div>
-        <p className="mx-10  py-1 text-[18px]">PASSWORD</p>
+      <div className="w-full">
+        <p className="py-1 text-[18px]">PASSWORD</p>
         <input
-          className="mx-10 w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
           type="password"
           placeholder="*******"
           value={newUser.userPassword}
@@ -79,10 +79,10 @@ const Register: FC = () => {
           }
         />
       </div>
-      <div>
-        <p className="mx-10  py-1 text-[18px]">CONFIRM PASSWORD</p>
+      <div className="w-full">
+        <p className="py-1 text-[18px]">CONFIRM PASSWORD</p>
         <input
-          className="mx-10 w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
           type="password"
           placeholder="*******"
           value={newUser.userConfirmPassword}
@@ -93,7 +93,7 @@ const Register: FC = () => {
       </div>
       <button
         onClick={() => handleSubmit(newUser)}
-        className="m-10 h-[40px] w-full rounded-sm bg-blue-700 text-center text-[20px] font-semibold text-white hover:bg-blue-900"
+        className="my-10 h-[40px] w-full rounded-sm bg-blue-700 text-center text-[20px] font-semibold text-white hover:bg-blue-900"
       >
         Next
       </button>

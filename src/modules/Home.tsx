@@ -33,10 +33,10 @@ interface HomeProps {
 const HomeModule: FC<HomeProps> = ({ customers, quotations, items }) => {
   const [openCreateQuote, setOpenCreateQuote] = useState(false);
   return (
-    <section className="relative h-[100] w-[100]">
+    <section className="relative h-full w-full px-[3%] py-[2%]">
       <div
         className={clsx(
-          'absolute z-10 mx-[30vh] my-[23vh] h-[52vh] rounded-lg border-[1px] border-gray-300 bg-white shadow-xl',
+          'absolute z-10 mx-[15vw] my-[23vh] h-[55%] w-[60%] rounded-lg border-[1px] border-gray-300 bg-white shadow-xl',
           openCreateQuote ? 'visible' : 'invisible'
         )}
       >
@@ -50,16 +50,18 @@ const HomeModule: FC<HomeProps> = ({ customers, quotations, items }) => {
         </button>
         <QuotationModal visibility={openCreateQuote} customers={customers} />
       </div>
-      <div>
-        <p className="mx-10 mt-5 mb-1 flex-1 text-4xl font-bold text-gray-600">
+      <div className="h-[15%]">
+        <p className="my-auto flex-1 py-[0.6%] text-4xl font-bold text-gray-600">
           Quotations
         </p>
-        <p className="my-4 mx-10 flex-1 text-2xl font-normal text-gray-600">
+        <p className="my-auto flex-1 text-2xl font-normal text-gray-600">
           Summary
         </p>
       </div>
-      <QuotesSummary quotations={quotations} items={items} />
-      <div className="mx-10 my-4 flex h-[7vh] flex-row">
+      <div className="h-[20%]">
+        <QuotesSummary quotations={quotations} items={items} />
+      </div>
+      <div className="my-[2%] flex h-[5%] w-full flex-row">
         <p className="my-auto flex-1 text-2xl font-normal text-gray-600">
           Records
         </p>
@@ -75,7 +77,9 @@ const HomeModule: FC<HomeProps> = ({ customers, quotations, items }) => {
           <input placeholder="Search" className="p-2" />
         </div>
       </div>
-      <RecordTable quotations={quotations} items={items} />
+      <div className="h-[50%] w-full">
+        <RecordTable quotations={quotations} items={items} />
+      </div>
     </section>
   );
 };

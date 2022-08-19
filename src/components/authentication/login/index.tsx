@@ -15,8 +15,8 @@ interface UserData {
 }
 const Login: FC<Users> = () => {
   const [user, setUser] = useState<UserData>({
-    userEmail: 'testuser@gmail.com',
-    userPassword: 'test1234',
+    userEmail: '',
+    userPassword: '',
   });
   const router = useRouter();
 
@@ -40,14 +40,14 @@ const Login: FC<Users> = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <h1 className="mx-10 mt-10 mb-2 text-justify text-[30px] font-semibold">
+    <div className="flex w-full flex-col p-1 md:p-3">
+      <h1 className="mt-10 mb-2 text-justify text-[30px] font-semibold">
         LOG IN
       </h1>
-      <div>
-        <p className="mx-10  py-2 text-[18px]">EMAIL</p>
+      <div className="w-full">
+        <p className="py-2 text-[18px]">EMAIL</p>
         <input
-          className="mx-10 w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
           placeholder="example@gmail.com"
           value={user.userEmail}
           onChange={(e) => {
@@ -55,10 +55,10 @@ const Login: FC<Users> = () => {
           }}
         />
       </div>
-      <div>
-        <p className="mx-10  py-2 text-[18px] ">PASSWORD</p>
+      <div className="w-full">
+        <p className="py-2 text-[18px] ">PASSWORD</p>
         <input
-          className="mx-10 w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
           type="password"
           placeholder="*******"
           value={user.userPassword}
@@ -68,7 +68,7 @@ const Login: FC<Users> = () => {
         />
       </div>
       <button
-        className="m-10 h-[40px] w-full rounded-sm bg-blue-700 text-center text-[20px] font-semibold text-white hover:bg-blue-900"
+        className="mx-auto my-10  h-[40px] w-full rounded-sm bg-blue-700 text-center text-[20px] font-semibold text-white hover:bg-blue-900"
         onClick={() => handleLogin(user)}
       >
         Next

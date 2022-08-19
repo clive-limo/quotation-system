@@ -5,7 +5,7 @@ type IMainProps = {
 };
 
 const MainLayout: FC<IMainProps> = ({ children }) => {
-  return <section className="h-[100vh] w-[100vw]">{children}</section>;
+  return <section className="h-screen w-screen">{children}</section>;
 };
 
 export { MainLayout };

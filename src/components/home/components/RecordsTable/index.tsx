@@ -24,7 +24,7 @@ interface RecordsProps {
 
 const RecordTable: FC<RecordsProps> = ({ quotations, items }) => {
   return (
-    <div className="mx-10 mt-3 rounded-lg border-[1px] border-gray-400">
+    <div className="h-full w-full rounded-lg border-[1px] border-gray-400">
       <div className="flex flex-row rounded-lg bg-gray-400 p-3">
         <p className="flex-1 text-center font-semibold text-blue-500">
           CUSTOMER
@@ -38,7 +38,7 @@ const RecordTable: FC<RecordsProps> = ({ quotations, items }) => {
           ACTIONS
         </p>
       </div>
-      <div className="my-1 h-[45vh] overflow-y-auto p-1">
+      <div className="my-1 h-full overflow-y-auto p-1">
         {quotations.map((quote) => {
           let total = 0;
 

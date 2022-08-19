@@ -17,8 +17,8 @@ interface UserProps {
 const AuthenticationPage: FC<UserProps> = ({ userData }) => {
   return (
     <MainLayout>
-      <section className="flex h-full w-full flex-row">
-        <div className=" flex h-full w-[75vw] bg-orange-300">
+      <section className="flex h-screen w-screen flex-col md:flex-row">
+        <div className=" flex h-[25%] w-full bg-orange-300 md:h-full md:w-[75%]">
           <img
             className="mx-auto"
             src="\assets\images\im-person.svg"
@@ -27,7 +27,7 @@ const AuthenticationPage: FC<UserProps> = ({ userData }) => {
             width={500}
           />
         </div>
-        <div className="flex flex-col">
+        <div className="mx-auto flex flex-col md:w-[25%] md:overflow-y-auto ">
           <Login userData={userData} />
           <Register />
         </div>

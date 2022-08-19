@@ -81,8 +81,8 @@ const QuotesSummary: FC<SummaryProps> = ({ quotations, items }) => {
   }
 
   return (
-    <div className="flex h-[18vh] flex-row">
-      <div className="ml-10 mr-3 flex flex-1 flex-row rounded-lg border-[1px] border-gray-400 p-2">
+    <div className="flex h-full w-full flex-row">
+      <div className="flex flex-1 flex-row rounded-lg border-[1px] border-gray-400 p-2 md:mr-2">
         <div className="relative flex flex-1 flex-col">
           <div className="w-[210px] flex-[0.5]">
             <p className="p-[2px] text-center text-xl font-bold text-gray-600">
@@ -91,7 +91,7 @@ const QuotesSummary: FC<SummaryProps> = ({ quotations, items }) => {
             <div className="h-[1px] w-full bg-gray-400 px-3" />
           </div>
           <div className="flex-1 pl-4">
-            <p className="text-[45px] font-light text-blue-400">
+            <p className="text-[24px] font-light text-blue-400 md:text-[45px]">
               {sumTotal.toLocaleString('en-US', {
                 style: 'currency',
                 currency: 'KSH',
@@ -106,7 +106,7 @@ const QuotesSummary: FC<SummaryProps> = ({ quotations, items }) => {
           </p>
         </div>
       </div>
-      <div className="ml-3 mr-10 flex flex-1 flex-row rounded-lg border-[1px] border-gray-400 p-2">
+      <div className="flex flex-1 flex-row rounded-lg border-[1px] border-gray-400 p-2 md:ml-2">
         <div className="relative flex flex-1 flex-col">
           <div className="w-[210px] flex-[0.5]">
             <p className="p-[2px] text-center text-xl font-bold text-gray-600">

@@ -76,7 +76,7 @@ const RecordCard: FC<RecordDetailProps> = ({
   };
 
   return (
-    <div className="my-1 flex h-[8vh] flex-row rounded-lg border-[1px] border-gray-500 ">
+    <div className="my-1 flex h-[15%] flex-row rounded-lg border-[1px] border-gray-500 ">
       <div className="flex flex-[3] flex-row">
         <p className="my-auto flex-1 text-center">{customerName}</p>
         <p className="my-auto flex-1 text-center text-blue-500">{quoteTotal}</p>

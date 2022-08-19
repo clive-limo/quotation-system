@@ -46,8 +46,8 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
   });
 
   const [selectedCustomer, setSelectedCustomer] = useState<CustomerDetails>({
-    customerName: '',
-    customerEmail: '',
+    customerName: 'none',
+    customerEmail: 'none',
   });
   // User selection state
   const [existingUser, setExistingUser] = useState(true);
@@ -171,13 +171,18 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
   return (
     <div
       className={clsx(
-        'relative h-[full] p-2',
+        'relative h-full w-full px-[3%] py-[2%]',
         visibility ? 'visible' : 'hidden'
       )}
     >
-      <div className={clsx(pageNumber === 1 ? 'visible' : 'hidden')}>
-        <div className="relative flex h-[6vh] w-full flex-row">
-          <h1 className="mx-3 pl-6 text-justify text-2xl font-bold text-gray-600">
+      <div
+        className={clsx(
+          'h-[90%] w-full',
+          pageNumber === 1 ? 'visible' : 'hidden'
+        )}
+      >
+        <div className="relative flex h-[13%] w-full flex-row pt-[2%]">
+          <h1 className="text-justify text-2xl font-bold text-gray-600">
             Create Quotation
           </h1>
           <button
@@ -185,17 +190,17 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
               setExistingUser(!existingUser);
             }}
             className={clsx(
-              'absolute right-0 mx-3 mt-4 rounded-md bg-blue-500 px-5 py-2 font-bold text-white'
+              'absolute right-0 rounded-md bg-blue-500 px-5 py-2 font-bold text-white'
             )}
           >
             {existingUser ? 'Create New Customer' : 'Select Existing Customer'}
           </button>
         </div>
 
-        <div className={clsx(existingUser ? 'visible' : 'hidden')}>
-          <p className="mx-3 text-lg text-gray-600">Select Customer</p>
-          <div className="flex h-[35vh] flex-row">
-            <div className="m-3 h-[35vh] w-[30vw] overflow-y-auto overflow-x-hidden rounded-md border-[0.5px] border-gray-400 p-2">
+        <div className={clsx('h-[75%]', existingUser ? 'visible' : 'hidden')}>
+          <p className="text-lg text-gray-600">Select Customer</p>
+          <div className="flex h-full flex-row">
+            <div className="h-full w-[60%] overflow-y-auto overflow-x-hidden rounded-md border-[0.5px] border-gray-400 p-2">
               {customers.map((customer) => {
                 return (
                   <CustomerCard
@@ -212,7 +217,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                 );
               })}
             </div>
-            <div className="m-3 h-[20vh] w-[20vw] rounded-md border-[0.5px] border-gray-400 p-3">
+            <div className="ml-[1.5%] h-[60%] w-[38.5%] rounded-md border-[0.5px] border-gray-400 p-3">
               <p className="text-center text-lg font-bold text-gray-600">
                 Selected Customer
               </p>
@@ -280,13 +285,18 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
         </div>
       </div>
 
-      <div className={clsx('m-1 p-1', pageNumber === 2 ? 'visible' : 'hidden')}>
-        <div className="h-[14vh]">
-          <h1 className="px-3 pl-6 text-2xl font-bold text-gray-600">
+      <div
+        className={clsx(
+          'h-[90%] w-full',
+          pageNumber === 2 ? 'visible' : 'hidden'
+        )}
+      >
+        <div className="h-[35%] w-full pt-[2%]">
+          <h1 className="text-2xl font-bold text-gray-600">
             Quotation Details
           </h1>
-          <div className="mb-2 flex flex-row p-1">
-            <div className="mx-2 my-1 flex flex-col">
+          <div className="mb-[1%] flex w-full flex-row">
+            <div className="mx-[.5%] flex flex-1 flex-col">
               <label>Item Name</label>
               <input
                 placeholder="Enter item name"
@@ -297,7 +307,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                 className="rounded-md border-[1px] border-black p-1"
               />
             </div>
-            <div className="m-1 flex flex-col">
+            <div className="mx-[.5%] flex flex-1 flex-col">
               <label>Item Quantity</label>
               <input
                 type="number"
@@ -309,7 +319,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                 className="rounded-md border-[1px] border-black p-1"
               />
             </div>
-            <div className="m-1 flex flex-col">
+            <div className="mx-[.5%] flex flex-1 flex-col">
               <label>Item Price</label>
               <input
                 type="number"
@@ -324,19 +334,18 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
 
             <button
               onClick={() => handleAddItem()}
-              className="mt-6 h-[40px] flex-1 rounded-md bg-blue-400 font-bold text-white"
+              className="mt-[2.5%] h-full flex-1 rounded-md bg-blue-400 py-[1%] px-[3%] font-bold text-white"
             >
               Add
             </button>
           </div>
         </div>
-        <div className="flex h-[28vh] flex-row pl-3 pr-1">
-          <div className="w-[28vw] overflow-y-auto rounded-md border-[1px] border-gray-500 bg-white p-1">
-            <p className="fixed h-4 bg-white px-3 text-lg font-bold text-gray-600">
+        <div className="flex h-[55%] w-full flex-row">
+          <div className="h-full w-[60%] overflow-y-auto rounded-md border-[1px] border-gray-500 ">
+            <p className="fixed h-4 rounded-md bg-white px-[0.5%] py-[0.3%] text-lg font-bold text-gray-600">
               Quotation Items
             </p>
-            <div>
-              <span className="m-4 h-5" />
+            <div className="mt-[8%]">
               {items ? (
                 items.map((item) => {
                   if (item.itemPrice === 0) {
@@ -356,12 +365,12 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
               )}
             </div>
           </div>
-          <div className="ml-4 flex h-[12vh] w-[20vw] flex-row rounded-md border-[1px] border-gray-500">
-            <label className="my-auto h-4 bg-white pl-3 pr-2 text-xl font-bold text-gray-600">
+          <div className="ml-[1%] flex h-[50%] w-[39%] flex-row rounded-md border-[1px] border-gray-500 px-[2%]">
+            <label className="my-auto bg-white text-lg font-bold text-gray-600">
               Total:
             </label>
             <div className="my-auto flex flex-row">
-              <p className="text-4xl font-thin text-blue-500">
+              <p className="text-3xl font-thin text-blue-500">
                 {sum.toLocaleString('en-US', {
                   style: 'currency',
                   currency: 'Ksh',
@@ -416,7 +425,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
         </div>
       </div>
 
-      <div className="ml-3 mr-2 h-[10vh]">
+      <div className="h-[10%] w-full">
         <div className="relative flex  flex-row">
           <button
             className="absolute  right-1 my-auto rounded-md bg-blue-500 px-5 py-2 font-bold text-white"
