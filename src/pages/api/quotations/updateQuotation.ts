@@ -6,6 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { quoteId } = req.body;
+
   try {
     await prisma.quotation.update({
       where: {

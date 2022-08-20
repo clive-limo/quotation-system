@@ -192,10 +192,8 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
   };
 
   useEffect(() => {
-    if (!visibility) {
-      handleClearState();
-    }
-  });
+    handleClearState();
+  }, [visibility]);
 
   return (
     <div
@@ -401,6 +399,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                       name={item.itemName}
                       quantity={item.itemQuantity}
                       price={item.itemPrice}
+                      isDeletable={true}
                     />
                   );
                 })
@@ -465,6 +464,7 @@ const QuotationModal: FC<QuoteProps> = ({ visibility, customers }) => {
                       name={item.itemName}
                       quantity={item.itemQuantity}
                       price={item.itemPrice}
+                      isDeletable={false}
                     />
                   );
                 })
