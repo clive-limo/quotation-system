@@ -75,20 +75,20 @@ const RecordTable: FC<RecordsProps> = ({ quotations, items }) => {
     <div className="flex h-full w-full flex-row rounded-lg border-[1px] border-gray-400">
       <div className="h-[95%] flex-[5]">
         {/* Title customers */}
-        <div className="flex h-[10%] w-full flex-row rounded-lg bg-gray-400 p-3">
-          <p className="flex-1 text-center font-semibold text-blue-500">
+        <div className="flex h-[10%] w-full flex-row rounded-lg bg-gray-400">
+          <p className="my-auto flex-1 text-center font-semibold text-blue-500">
             CUSTOMER
           </p>
-          <p className="flex-1 text-center font-semibold text-blue-500">
+          <p className="my-auto flex-1 text-center font-semibold text-blue-500">
             AMOUNT
           </p>
-          <p className="flex-1 text-center font-semibold text-blue-500">
+          <p className="my-auto flex-1 text-center font-semibold text-blue-500">
             DATE CREATED
           </p>
-          <p className="flex-1 text-center font-semibold text-blue-500">
+          <p className="my-auto flex-1 text-center font-semibold text-blue-500">
             STATUS
           </p>
-          <p className="flex-[0.7] text-center font-semibold text-blue-500">
+          <p className="my-auto flex-[0.7] text-center font-semibold text-blue-500">
             ACTIONS
           </p>
         </div>

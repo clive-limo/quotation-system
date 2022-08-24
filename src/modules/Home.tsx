@@ -33,7 +33,7 @@ interface HomeProps {
 }
 const HomeModule: FC<HomeProps> = ({ customers, quotations, items }) => {
   const [openCreateQuote, setOpenCreateQuote] = useState(false);
-  const [openCreateMail, setOpenCreateMail] = useState(true);
+  const [openCreateMail, setOpenCreateMail] = useState(false);
   return (
     <section className="relative h-full w-full px-[3%]">
       <div
