@@ -36,7 +36,7 @@ const InvoiceModule: FC<InvoiceModuleProps> = ({
   invoices,
 }) => {
   return (
-    <div className="h-full w-full overflow-hidden">
+    <div className="h-full w-full overflow-hidden px-[1.5%]">
       <div className="h-[15%]">
         <p className="my-auto flex-1 py-[0.6%] text-4xl font-bold text-gray-600">
           Invoices

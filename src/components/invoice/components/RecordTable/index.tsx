@@ -21,7 +21,7 @@ interface InvoiceTableProps {
 
 const InvoiceTable: FC<InvoiceTableProps> = ({ items, invoices }) => {
   return (
-    <div className="flex h-full w-full flex-col rounded-lg">
+    <div className="flex h-full w-full flex-col rounded-lg border-[1px] border-gray-400">
       <div className="flex h-[10%] w-full flex-row rounded-lg bg-gray-400">
         <p className=" my-auto flex-1 text-center font-semibold text-blue-500">
           QUOTE N0.
@@ -39,12 +39,13 @@ const InvoiceTable: FC<InvoiceTableProps> = ({ items, invoices }) => {
           ACTIONS
         </p>
       </div>
-      <div className="flex h-[75%] flex-row">
+      <div className="h-[75%] px-[.5%]">
         {invoices?.map((invoice) => {
           return (
             <InvoiceCard
               key={invoice.id}
               items={items}
+              id={invoice.id}
               quoteNumber={invoice.quotationId}
               invoiceStatus={invoice.status}
               dateCreated={invoice.dateCreated}
