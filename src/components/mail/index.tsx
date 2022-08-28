@@ -1,34 +1,29 @@
 import type { FC } from 'react';
 
-const MailPreview: FC = () => {
+interface PreviewProps {
+  customerName: string;
+}
+const MailPreview: FC<PreviewProps> = ({ customerName }) => {
   return (
-    <div className="relative mx-auto h-[90%] w-[45%] rounded-md border-[.5px] border-gray-400 bg-white shadow-xl">
+    <div className="relative mx-auto h-[90%] w-[100%] rounded-md border-[.5px] border-gray-400 bg-white px-[3%] py-[1%] shadow-xl">
       <div className="relative m-[1%] flex flex-row">
-        <img
-          className=" rounded-xl"
-          src="/assets/images/im-logo.png"
-          alt="logo-image"
-          height={100}
-          width={100}
-        />
+        <p className="font-aboreto text-3xl text-blue-800">
+          Chemtron <br></br> Enterprises
+        </p>
         <div className="absolute right-0 flex flex-col">
-          <p className="text-xs font-bold">CHEMTRON ENTERPRISES</p>
-          <p className="text-xs font-light">P.O Box 8539-3100 KAPSOYA</p>
-          <p className="text-xs font-light">MOBILE: +254 723268939</p>
-          <p className="text-xs font-light">
-            EMAIL: info@chemtronenterprises.com
-          </p>
-          <p className="text-xs font-light">PIN: P051565361M</p>
+          <p className="font-bold">CHEMTRON ENTERPRISES</p>
+          <p className="font-light">P.O Box 8539-3100 KAPSOYA</p>
+          <p className="font-light">MOBILE: +254 723268939</p>
+          <p className="font-light">EMAIL: info@chemtronenterprises.com</p>
+          <p className=" font-light">PIN: P051565361M</p>
         </div>
       </div>
       <div className="mx-1 mt-[6%] flex flex-col">
-        <p className="text-xs font-bold">CHEMTRON ENTERPRISES</p>
-        <p className="text-xs font-light">P.O Box 8539-3100 KAPSOYA</p>
-        <p className="text-xs font-light">MOBILE: +254 723268939</p>
-        <p className="text-xs font-light">
-          EMAIL: info@chemtronenterprises.com
-        </p>
-        <p className="text-xs font-light">PIN: P051565361M</p>
+        <p className=" font-bold">{customerName}</p>
+        <p className=" font-light">P.O. Box</p>
+        <p className=" font-light">Mobile</p>
+        <p className=" font-light">EMAIL: info@chemtronenterprises.com</p>
+        <p className=" font-light">PIN: P051565361M</p>
       </div>
       {/* Add Items */}
       <div className="absolute bottom-0 w-full ">
@@ -36,6 +31,7 @@ const MailPreview: FC = () => {
           Footer
         </p>
       </div>
+      <button className="rounded-full bg-blue-500 p-2">Create PDF</button>
     </div>
   );
 };

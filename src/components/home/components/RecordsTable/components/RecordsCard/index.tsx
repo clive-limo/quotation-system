@@ -71,6 +71,9 @@ const RecordCard: FC<RecordDetailProps> = ({
       handleUpdateQuote(quoteId);
     }
   };
+  const handleEmail = (selectedCustomerName: string) => {
+    sessionStorage.setItem('customerName', selectedCustomerName);
+  };
 
   return (
     <div className="my-1 flex h-[20%] flex-row rounded-lg border-[1px] border-gray-500 ">
@@ -98,7 +101,13 @@ const RecordCard: FC<RecordDetailProps> = ({
           pendingAction ? 'hidden' : 'visible'
         )}
       >
-        <button className="flex-1" onClick={() => router.push('/createMail')}>
+        <button
+          className="flex-1"
+          onClick={() => {
+            handleEmail(customerName);
+            router.push('/createMail');
+          }}
+        >
           <img
             src="/assets/icons/ic-email.svg"
             alt="mail-icon"

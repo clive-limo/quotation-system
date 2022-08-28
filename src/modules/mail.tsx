@@ -1,11 +1,25 @@
+import clsx from 'clsx';
 import type { FC } from 'react';
+import { useState } from 'react';
 
 import MailPreview from '@/components/mail';
 
-const MailModule: FC = () => {
+interface MailProps {
+  customerName: string;
+}
+const MailModule: FC<MailProps> = ({ customerName }) => {
+  const [detailsOpen, setDetailsOpen] = useState(true);
+  const handleClick = () => {
+    setDetailsOpen(!detailsOpen);
+  };
   return (
     <section className="flex h-full w-full flex-row p-[1.5%]">
-      <div className="h-full w-[30%] rounded-l-lg border-y-[1px] border-l-[1px] border-gray-400 px-[1.5%] py-[1%]">
+      <div
+        className={clsx(
+          'relative h-full flex-[0.3] rounded-l-lg border-y-[1px] border-l-[1px] border-gray-400 px-[1.5%] py-[1%]',
+          detailsOpen ? 'visible' : 'hidden'
+        )}
+      >
         <p className="my-auto  flex-1 py-[0.6%] text-xl font-bold text-gray-600">
           Email Title
         </p>
@@ -90,20 +104,26 @@ const MailModule: FC = () => {
         </p>
         <div className="flex flex-col ">
           <label className="px-[3%] text-sm font-bold text-blue-200">
-            Address
+            Tax Percentage
           </label>
           <input
             placeholder="Building Name, Street Name"
             className="rounded-full border-[.5px] border-gray-400 py-[1.5%] px-[3%]"
           />
+          <button
+            onClick={() => handleClick()}
+            className="absolute top-1 right-1 rounded-full bg-blue-600 p-2 font-bold text-white "
+          >
+            Done
+          </button>
         </div>
       </div>
       {/* Email Preview */}
-      <div className="h-full w-[70%] rounded-r-lg border-[.5px] border-gray-400 px-[1.5%] py-[1%]">
+      <div className="h-[100%] flex-1 rounded-r-lg border-[.5px] border-gray-400 px-[1.5%] py-[1%]">
         <p className="my-auto  flex-1 py-[0.6%] text-xl font-bold text-gray-600">
           Preview
         </p>
-        <MailPreview />
+        <MailPreview customerName={customerName} />
       </div>
     </section>
   );

@@ -15,6 +15,9 @@ module.exports = {
       '6xl': '4rem',
     },
     extend: {
+      fontFamily: {
+        aboreto: ['Aboreto', 'san-serif'],
+      },
       colors: {
         gray: {
           100: '#f7fafc',
