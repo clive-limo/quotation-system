@@ -6,18 +6,44 @@ import MailPreview from '@/components/mail';
 
 interface MailProps {
   customerName: string;
+  items: {
+    id: number;
+    itemName: string;
+    itemPrice: number;
+    itemQuantity: number;
+    quotationId: number;
+  }[];
 }
-const MailModule: FC<MailProps> = ({ customerName }) => {
-  const [detailsOpen, setDetailsOpen] = useState(true);
-  const handleClick = () => {
-    setDetailsOpen(!detailsOpen);
-  };
+interface PreviewData {
+  address: string;
+  postalAddress: string;
+  officeNumber: string;
+  emailAddress: string;
+  pinNumber: string;
+}
+interface SalesData {
+  accountRef: string;
+  receiptNumber: string;
+  taxPercentage: number;
+}
+const MailModule: FC<MailProps> = ({ customerName, items }) => {
+  const [previewData, setPreviewData] = useState<PreviewData>({
+    address: '',
+    postalAddress: '',
+    officeNumber: '',
+    emailAddress: '',
+    pinNumber: '',
+  });
+  const [salesData, setSalesData] = useState<SalesData>({
+    accountRef: '',
+    receiptNumber: '',
+    taxPercentage: 16,
+  });
   return (
     <section className="flex h-full w-full flex-row p-[1.5%]">
       <div
         className={clsx(
-          'relative h-full flex-[0.3] rounded-l-lg border-y-[1px] border-l-[1px] border-gray-400 px-[1.5%] py-[1%]',
-          detailsOpen ? 'visible' : 'hidden'
+          'relative h-full flex-[0.3] rounded-l-lg border-y-[1px] border-l-[1px] border-gray-400 px-[1.5%] py-[1%]'
         )}
       >
         <p className="my-auto  flex-1 py-[0.6%] text-xl font-bold text-gray-600">
@@ -42,6 +68,10 @@ const MailModule: FC<MailProps> = ({ customerName }) => {
           <input
             placeholder="Building Name, Street Name"
             className="rounded-full border-[.5px] border-gray-400 py-[1.5%] px-[3%]"
+            value={previewData.address}
+            onChange={(e) =>
+              setPreviewData({ ...previewData, address: e.target.value })
+            }
           />
         </div>
         <div className="flex flex-col ">
@@ -51,6 +81,10 @@ const MailModule: FC<MailProps> = ({ customerName }) => {
           <input
             placeholder="P.O Box Address"
             className="rounded-full border-[.5px] border-gray-400 py-[1.5%] px-[3%]"
+            value={previewData.postalAddress}
+            onChange={(e) =>
+              setPreviewData({ ...previewData, postalAddress: e.target.value })
+            }
           />
         </div>
         <div className="flex flex-col ">
@@ -61,11 +95,25 @@ const MailModule: FC<MailProps> = ({ customerName }) => {
             placeholder="Office Number"
             type="number"
             className="rounded-full border-[.5px] border-gray-400 py-[1.5%] px-[3%]"
+            value={previewData.officeNumber}
+            onChange={(e) =>
+              setPreviewData({
+                ...previewData,
+                officeNumber: e.target.value,
+              })
+            }
           />
           <input
-            placeholder="Other Mobile Number"
-            type="number"
+            placeholder="Email Address"
+            type="text"
             className="mt-[1.5%] rounded-full border-[.5px] border-gray-400 px-[3%] py-[1.5%]"
+            value={previewData.emailAddress}
+            onChange={(e) =>
+              setPreviewData({
+                ...previewData,
+                emailAddress: e.target.value,
+              })
+            }
           />
         </div>
         <div className="flex flex-col ">
@@ -75,6 +123,10 @@ const MailModule: FC<MailProps> = ({ customerName }) => {
           <input
             placeholder="PIN Number"
             className="rounded-full border-[.5px] border-gray-400 py-[1.5%] px-[3%]"
+            value={previewData.pinNumber}
+            onChange={(e) =>
+              setPreviewData({ ...previewData, pinNumber: e.target.value })
+            }
           />
         </div>
         {/* Sale Details div */}
@@ -88,6 +140,10 @@ const MailModule: FC<MailProps> = ({ customerName }) => {
           <input
             placeholder="Account Reference"
             className="rounded-full border-[.5px] border-gray-400 py-[1.5%] px-[3%]"
+            value={salesData.accountRef}
+            onChange={(e) =>
+              setSalesData({ ...salesData, accountRef: e.target.value })
+            }
           />
         </div>
         <div className="flex flex-col ">
@@ -97,6 +153,10 @@ const MailModule: FC<MailProps> = ({ customerName }) => {
           <input
             placeholder="0110XXXXXXXXXXXXX XX"
             className="rounded-full border-[.5px] border-gray-400 py-[1.5%] px-[3%]"
+            value={salesData.accountRef}
+            onChange={(e) =>
+              setSalesData({ ...salesData, accountRef: e.target.value })
+            }
           />
         </div>
         <p className="my-auto mt-[2%] flex-1 py-[0.6%] text-xl font-bold text-gray-600">
@@ -110,12 +170,6 @@ const MailModule: FC<MailProps> = ({ customerName }) => {
             placeholder="Building Name, Street Name"
             className="rounded-full border-[.5px] border-gray-400 py-[1.5%] px-[3%]"
           />
-          <button
-            onClick={() => handleClick()}
-            className="absolute top-1 right-1 rounded-full bg-blue-600 p-2 font-bold text-white "
-          >
-            Done
-          </button>
         </div>
       </div>
       {/* Email Preview */}
@@ -123,7 +177,12 @@ const MailModule: FC<MailProps> = ({ customerName }) => {
         <p className="my-auto  flex-1 py-[0.6%] text-xl font-bold text-gray-600">
           Preview
         </p>
-        <MailPreview customerName={customerName} />
+        <MailPreview
+          customerName={customerName}
+          previewData={previewData}
+          salesDetails={salesData}
+          items={items}
+        />
       </div>
     </section>
   );

@@ -73,6 +73,7 @@ const RecordCard: FC<RecordDetailProps> = ({
   };
   const handleEmail = (selectedCustomerName: string) => {
     sessionStorage.setItem('customerName', selectedCustomerName);
+    sessionStorage.setItem('quotationNumber', id.toString());
   };
 
   return (
