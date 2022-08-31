@@ -84,7 +84,7 @@ const MailPreview: FC<PreviewProps> = ({
       </div>
       {/* Add Items */}
       <p className="mt-3 text-lg font-semibold underline">
-        RE: QUOTATION FOR ITEMS IN QT{generateQuoteNumber(quotationNo || '0')}{' '}
+        QUOTATION QT{generateQuoteNumber(quotationNo || '0')}{' '}
       </p>
 
       <div>
@@ -117,22 +117,26 @@ const MailPreview: FC<PreviewProps> = ({
           })}
         </div>
       </div>
-      <div className="flex w-[300px] flex-col">
-        <div className="flex w-full flex-row">
-          <p className="flex-[1] font-semibold text-gray-400 ">SUBTOTAL</p>
-          <p className="flex-[2] text-end">{total}</p>
+      <div className="relative mt-10">
+        <div className="absolute right-0 mt-5 flex w-[300px] flex-col">
+          <div className="flex w-full flex-row">
+            <p className="flex-[1] font-semibold text-gray-400 ">SUBTOTAL</p>
+            <p className="flex-[2] text-end">{total}</p>
+          </div>
+          <span className="mx-auto my-1 h-[1px] w-full bg-gray-400" />
+          <div className="flex w-full flex-row">
+            <p className="flex-[1] font-semibold text-gray-400 ">VAT</p>
+            <p className="flex-[2] text-end">{tax}</p>
+          </div>
+          <span className="mx-auto my-1 h-[1px] w-full bg-gray-400" />
+          <div className="flex w-full flex-row">
+            <p className="flex-[1] text-lg  font-semibold text-gray-600">
+              TOTAL
+            </p>
+            <p className="flex-[2] text-end text-2xl">{total + tax}</p>
+          </div>
+          <span className="mx-auto my-1 h-[1px] w-full bg-gray-400" />
         </div>
-        <span className="mx-auto my-1 h-[1px] w-full bg-gray-400" />
-        <div className="flex w-full flex-row">
-          <p className="flex-[1] font-semibold text-gray-400 ">VAT</p>
-          <p className="flex-[2] text-end">{tax}</p>
-        </div>
-        <span className="mx-auto my-1 h-[1px] w-full bg-gray-400" />
-        <div className="flex w-full flex-row">
-          <p className="flex-[1] text-lg  font-semibold text-gray-600">TOTAL</p>
-          <p className="flex-[2] text-end text-2xl">{total + tax}</p>
-        </div>
-        <span className="mx-auto my-1 h-[1px] w-full bg-gray-400" />
       </div>
     </div>
   );
