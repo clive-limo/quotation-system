@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 
 import MailPreview from '@/components/mail';
+import FinalMail from '@/components/mail/FinalMail';
 
 interface MailProps {
   customerName: string;
@@ -39,11 +40,13 @@ const MailModule: FC<MailProps> = ({ customerName, items }) => {
     receiptNumber: '',
     taxPercentage: 16,
   });
+  const [printView, setPrintView] = useState(false);
   return (
     <section className="flex h-full w-full flex-row p-[1.5%]">
       <div
         className={clsx(
-          'relative h-full flex-[0.3] rounded-l-lg border-y-[1px] border-l-[1px] border-gray-400 px-[1.5%] py-[1%]'
+          'relative h-full flex-[0.3] rounded-l-lg border-y-[1px] border-l-[1px] border-gray-400 px-[1.5%] py-[1%]',
+          printView ? 'hidden' : 'visible'
         )}
       >
         <p className="my-auto  flex-1 py-[0.6%] text-xl font-bold text-gray-600">
@@ -173,7 +176,12 @@ const MailModule: FC<MailProps> = ({ customerName, items }) => {
         </div>
       </div>
       {/* Email Preview */}
-      <div className="h-[100%] flex-1 rounded-r-lg border-[.5px] border-gray-400 px-[1.5%] py-[1%]">
+      <div
+        className={clsx(
+          'h-[100%] flex-1 rounded-r-lg border-[.5px] border-gray-400 px-[1.5%] py-[1%]',
+          printView ? 'hidden' : 'visible'
+        )}
+      >
         <p className="my-auto  flex-1 py-[0.6%] text-xl font-bold text-gray-600">
           Preview
         </p>
@@ -184,6 +192,23 @@ const MailModule: FC<MailProps> = ({ customerName, items }) => {
           items={items}
         />
       </div>
+      <div className={clsx('h-full w-full', printView ? 'visible' : 'hidden')}>
+        <FinalMail
+          customerName={customerName}
+          previewData={previewData}
+          salesDetails={salesData}
+          items={items}
+        />
+      </div>
+      <button
+        onClick={() => setPrintView(!printView)}
+        className={clsx(
+          'absolute right-0 top-0 m-[1.5%] h-[40px] rounded-full bg-blue-800 font-bold text-white first-letter:w-[250px] ',
+          printView ? 'w-[40px]' : 'w-[250px]'
+        )}
+      >
+        {printView ? '<' : 'print'}
+      </button>
     </section>
   );
 };

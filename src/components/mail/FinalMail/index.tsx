@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useEffect } from 'react';
 
-import MailCard from './components/MailItemsCard';
+import MailCard from '../components/MailItemsCard';
 
 interface PreviewProps {
   customerName: string;
@@ -25,7 +25,7 @@ interface PreviewProps {
     quotationId: number;
   }[];
 }
-const MailPreview: FC<PreviewProps> = ({
+const FinalMail: FC<PreviewProps> = ({
   customerName,
   previewData,
   salesDetails,
@@ -43,7 +43,9 @@ const MailPreview: FC<PreviewProps> = ({
   const quotationNo = sessionStorage.getItem('quotationNumber');
 
   const quoteItems = items.filter(
-    (item) => item.quotationId === parseInt(quotationNo || '0', 10)
+    (item) =>
+      item.quotationId === parseInt(quotationNo || '0', 10) &&
+      item.itemQuantity !== 0
   );
 
   const total = quoteItems.reduce((accumulator, item) => {
@@ -57,7 +59,7 @@ const MailPreview: FC<PreviewProps> = ({
   }, []);
 
   return (
-    <div className="relative mx-auto h-full w-[60%] rounded-md border-[.5px] border-gray-400 bg-white px-[3%] py-[1%] shadow-xl">
+    <div className="relative mx-auto h-full w-[95%] rounded-md border-[.5px] border-gray-400 bg-white px-[3%] py-[1%] shadow-xl">
       <div className="relative m-[1%] flex flex-row">
         <p className="font-aboreto text-3xl text-blue-800">
           Chemtron <br></br> Enterprises
@@ -142,4 +144,4 @@ const MailPreview: FC<PreviewProps> = ({
   );
 };
 
-export default MailPreview;
+export default FinalMail;
