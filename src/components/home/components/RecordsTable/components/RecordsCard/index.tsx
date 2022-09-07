@@ -77,7 +77,7 @@ const RecordCard: FC<RecordDetailProps> = ({
   };
 
   return (
-    <div className="my-1 flex h-[20%] flex-row rounded-lg border-[1px] border-gray-500 ">
+    <div className="my-1 flex h-[80px] flex-row border-b-[1px] border-gray-400 ">
       {/* Quote details div */}
       <div className="flex flex-[3] flex-row">
         <p className="my-auto flex-1 text-center">{customerName}</p>
@@ -89,7 +89,7 @@ const RecordCard: FC<RecordDetailProps> = ({
         <p
           className={clsx(
             ' m-auto w-[8vw] rounded-full text-center text-white',
-            approvalStatus ? 'bg-green-500' : 'bg-yellow-500'
+            approvalStatus ? 'bg-green-300' : 'bg-yellow-300'
           )}
         >
           {approvalStatus ? 'Approved' : 'Pending'}

@@ -72,10 +72,10 @@ const RecordTable: FC<RecordsProps> = ({ quotations, items }) => {
   }, [selectedQuote]);
 
   return (
-    <div className="flex h-full w-full flex-row rounded-lg border-[1px] border-gray-400">
+    <div className="flex h-[76%] w-full flex-row overflow-x-hidden rounded-[50px] border-[1px] border-gray-400">
       <div className="h-[95%] flex-[5]">
         {/* Title customers */}
-        <div className="flex h-[10%] w-full flex-row rounded-lg bg-gray-400">
+        <div className="flex h-[10%] w-full flex-row bg-gray-400">
           <p className="my-auto flex-1 text-center font-semibold text-blue-500">
             CUSTOMER
           </p>
@@ -93,7 +93,7 @@ const RecordTable: FC<RecordsProps> = ({ quotations, items }) => {
           </p>
         </div>
         {/* Quotations Cards */}
-        <div className="my-1 h-[90%] w-full overflow-y-auto p-1">
+        <div className="h-[90%] w-full overflow-y-auto">
           {quotations.map((quote) => {
             let total = 0;
 
@@ -126,7 +126,7 @@ const RecordTable: FC<RecordsProps> = ({ quotations, items }) => {
       {/* Show details div */}
       <div
         className={clsx(
-          'm-[.5%] h-[95%] flex-[2] overflow-y-auto rounded-lg border-[1px] border-gray-300 bg-white p-[.5%] shadow-lg',
+          'm-[.5%] h-[95%] flex-[2] overflow-y-auto rounded-l-lg rounded-r-[50px] border-[1px] border-gray-300 bg-white p-[.5%] shadow-lg',
           detailsOpen ? 'visible' : 'hidden'
         )}
       >

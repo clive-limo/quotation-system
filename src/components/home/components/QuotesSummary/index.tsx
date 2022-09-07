@@ -82,7 +82,7 @@ const QuotesSummary: FC<SummaryProps> = ({ quotations, items }) => {
 
   return (
     <div className="flex h-full w-full flex-row">
-      <div className="flex flex-1 flex-row rounded-lg border-[1px] border-gray-400 p-2 md:mr-2">
+      <div className="flex flex-1 flex-row rounded-[50px] border-[1px] border-gray-400 p-2 shadow-lg md:mr-8">
         <div className="relative flex flex-1 flex-col">
           <div className="w-[210px] flex-[0.5]">
             <p className="p-[2px] text-center text-xl font-bold text-gray-600">
@@ -106,7 +106,7 @@ const QuotesSummary: FC<SummaryProps> = ({ quotations, items }) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-1 flex-row rounded-lg border-[1px] border-gray-400 p-2 md:ml-2">
+      <div className="flex flex-1 flex-row rounded-[50px] border-[1px] border-gray-400 p-2 shadow-lg md:ml-8">
         <div className="relative flex flex-1 flex-col">
           <div className="w-[210px] flex-[0.5]">
             <p className="p-[2px] text-center text-xl font-bold text-gray-600">
