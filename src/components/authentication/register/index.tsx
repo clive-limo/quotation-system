@@ -49,10 +49,6 @@ const Register: FC = () => {
 
   const [registerClicked, setRegisterClicked] = useState(false);
 
-  const refreshData = () => {
-    router.replace(router.asPath);
-  };
-
   const handleSubmit = async (data: UserData) => {
     setRegisterClicked(true);
     if (data.userEmail !== '') {
