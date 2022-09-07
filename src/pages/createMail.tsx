@@ -17,7 +17,6 @@ interface IProps {
 
 const CreateMail: FC<IProps> = ({ items }) => {
   const name = sessionStorage.getItem('customerName') || 'None Selected';
-  console.log(items);
   return (
     <MainLayout>
       <MailModule customerName={name} items={items} />
