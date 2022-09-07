@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -18,6 +19,8 @@ const Register: FC = () => {
     userStatus: true,
     userId: '',
   });
+
+  const [errorPoint, setErrorPoint] = useState('none');
 
   const router = useRouter();
 
@@ -44,21 +47,45 @@ const Register: FC = () => {
     }
   }
 
+  const [registerClicked, setRegisterClicked] = useState(false);
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
   const handleSubmit = async (data: UserData) => {
-    console.log('CLICKED');
-    try {
-      createUser(data);
-    } catch (error) {
-      console.log(error);
+    setRegisterClicked(true);
+    if (data.userEmail !== '') {
+      if (data.userConfirmPassword !== '' && data.userPassword !== '') {
+        if (data.userConfirmPassword === data.userPassword) {
+          setRegisterClicked(!registerClicked);
+          try {
+            createUser(data);
+          } catch (error) {
+            console.log(error);
+          }
+          setErrorPoint('none');
+        } else {
+          setErrorPoint('pass_mismatch');
+        }
+      } else {
+        setErrorPoint('null_password');
+      }
+    } else {
+      setRegisterClicked(false);
+      setErrorPoint('mail');
     }
   };
   return (
-    <div className="flex w-full flex-col p-1 md:p-3">
-      <h1 className="mx-7 text-justify text-[30px] font-semibold">REGISTER</h1>
+    <div className="flex w-full flex-col p-1 md:px-7 md:py-2">
+      <h1 className="text-justify text-[30px] font-semibold">REGISTER</h1>
       <div className="w-full">
         <p className="py-1 text-[18px]">EMAIL</p>
         <input
-          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className={clsx(
+            'w-full rounded-sm border-[1px] px-5 py-2 text-[18px]',
+            errorPoint === 'mail' ? 'border-red-500' : 'border-gray-500'
+          )}
           placeholder="example@gmail.com"
           type="text"
           value={newUser.userEmail}
@@ -70,7 +97,12 @@ const Register: FC = () => {
       <div className="w-full">
         <p className="py-1 text-[18px]">PASSWORD</p>
         <input
-          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className={clsx(
+            'w-full rounded-sm border-[1px] border-gray-500 px-5 py-2 text-[18px]',
+            errorPoint === 'null_password' || errorPoint === 'pass_mismatch'
+              ? 'border-red-500'
+              : 'border-gray-500'
+          )}
           type="password"
           placeholder="*******"
           value={newUser.userPassword}
@@ -82,7 +114,12 @@ const Register: FC = () => {
       <div className="w-full">
         <p className="py-1 text-[18px]">CONFIRM PASSWORD</p>
         <input
-          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className={clsx(
+            'w-full rounded-sm border-[1px] border-gray-500 px-5 py-2 text-[18px]',
+            errorPoint === 'null_password' || errorPoint === 'pass_mismatch'
+              ? 'border-red-500'
+              : 'border-gray-500'
+          )}
           type="password"
           placeholder="*******"
           value={newUser.userConfirmPassword}
@@ -91,12 +128,31 @@ const Register: FC = () => {
           }
         />
       </div>
-      <button
-        onClick={() => handleSubmit(newUser)}
-        className="my-10 h-[40px] w-full rounded-sm bg-blue-700 text-center text-[20px] font-semibold text-white hover:bg-blue-900"
-      >
-        Next
-      </button>
+      <div className="relative my-8">
+        <button
+          onClick={async () => {
+            await handleSubmit(newUser);
+          }}
+          className={clsx(
+            'absolute right-0  w-[60%] rounded-full p-2 text-center font-semibold text-white',
+            registerClicked
+              ? 'bg-white shadow-md'
+              : 'bg-blue-700 hover:bg-blue-900'
+          )}
+        >
+          {registerClicked ? (
+            <img
+              className="mx-auto"
+              src="/assets/icons/loading.gif"
+              height={25}
+              width={25}
+              alt="loading-icon"
+            />
+          ) : (
+            'Next'
+          )}
+        </button>
+      </div>
     </div>
   );
 };

@@ -6,22 +6,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (!req.body) {
-    res.status(404).json({ message: 'No data provided' });
-    return;
-  }
   const { email, password } = req.body;
   const SECRET_KEY = 'iMocQxjufnkqORjYbockL2cBlkwaISVW';
 
-  const allUsers = await prisma.user.findMany({});
+  const currentUser = await prisma.user.findMany({
+    where: {
+      userEmail: email,
+      userPassword: password,
+    },
+  });
+  console.log(currentUser);
 
-  const currentUser = allUsers.filter(
-    (dbUsers) =>
-      dbUsers.userEmail === email &&
-      dbUsers.userPassword === password.userPassword
-  );
-
-  if (currentUser) {
+  if (currentUser.length !== 0) {
     res.status(200).json({
       token: jwt.sign(
         {
@@ -30,9 +26,9 @@ export default async function handler(
         },
         SECRET_KEY,
         {
-          expiresIn: '1d',
+          expiresIn: '3d',
         }
       ),
     });
-  }
+  } else res.status(300).json({ message: 'Login Failed' });
 }

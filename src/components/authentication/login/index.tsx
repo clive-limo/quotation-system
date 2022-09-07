@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -20,6 +21,8 @@ const Login: FC<Users> = () => {
   });
   const router = useRouter();
 
+  const [loginClicked, setLoginClicked] = useState(false);
+
   const handleLogin = async (userData: UserData) => {
     const email = userData.userEmail;
     const password = userData.userPassword;
@@ -37,17 +40,18 @@ const Login: FC<Users> = () => {
     if (token) {
       router.push('/home');
     }
+    setLoginClicked(!loginClicked);
   };
 
   return (
-    <div className="flex w-full flex-col p-1 md:p-3">
+    <div className="flex w-full flex-col p-1 md:px-7 md:py-2">
       <h1 className="mt-10 mb-2 text-justify text-[30px] font-semibold">
         LOG IN
       </h1>
       <div className="w-full">
         <p className="py-2 text-[18px]">EMAIL</p>
         <input
-          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className="w-full rounded-sm border-[1px] border-gray-400 px-5 py-2 text-[18px]"
           placeholder="example@gmail.com"
           value={user.userEmail}
           onChange={(e) => {
@@ -58,7 +62,7 @@ const Login: FC<Users> = () => {
       <div className="w-full">
         <p className="py-2 text-[18px] ">PASSWORD</p>
         <input
-          className="w-full rounded-sm border-[1px] border-black px-5 py-2 text-[18px]"
+          className="w-full rounded-sm border-[1px] border-gray-400 px-5 py-2 text-[18px]"
           type="password"
           placeholder="*******"
           value={user.userPassword}
@@ -67,12 +71,32 @@ const Login: FC<Users> = () => {
           }}
         />
       </div>
-      <button
-        className="mx-auto my-10  h-[40px] w-full rounded-sm bg-blue-700 text-center text-[20px] font-semibold text-white hover:bg-blue-900"
-        onClick={() => handleLogin(user)}
-      >
-        Next
-      </button>
+      <div className="relative my-8">
+        <button
+          className={clsx(
+            'absolute right-0  w-[60%] rounded-full p-2 text-center font-semibold text-white',
+            loginClicked
+              ? 'bg-white shadow-md'
+              : 'bg-blue-700 hover:bg-blue-900'
+          )}
+          onClick={() => {
+            handleLogin(user);
+            setLoginClicked(!loginClicked);
+          }}
+        >
+          {loginClicked ? (
+            <img
+              className="mx-auto"
+              src="/assets/icons/loading.gif"
+              height={25}
+              width={25}
+              alt="loading-icon"
+            />
+          ) : (
+            'Next'
+          )}
+        </button>
+      </div>
     </div>
   );
 };
