@@ -3,7 +3,7 @@ import type { GetServerSideProps } from 'next';
 import type { FC } from 'react';
 
 import { MainLayout } from '@/layouts/MainLayout';
-import MailModule from '@/modules/Mail';
+import MailModule from '@/modules/CreateMail';
 
 interface IProps {
   items: {
