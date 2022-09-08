@@ -92,11 +92,11 @@ const InvoiceSummary: FC<SummaryProps> = ({ quotations, items, invoices }) => {
 
   return (
     <div className="flex h-full w-full flex-row">
-      <div className="flex flex-1 flex-row rounded-lg border-[1px] border-gray-400 p-2 md:mr-2">
+      <div className="flex flex-1 flex-row rounded-[50px] border-[1px] border-gray-400 p-2 shadow-md md:mr-10">
         <div className="relative flex flex-1 flex-col">
           <div className="w-[210px] flex-[0.5]">
             <p className="p-[2px] text-center text-xl font-bold text-gray-600">
-              Approved Quotes
+              Paid Invoices
             </p>
             <div className="h-[1px] w-full bg-gray-400 px-3" />
           </div>
@@ -116,11 +116,11 @@ const InvoiceSummary: FC<SummaryProps> = ({ quotations, items, invoices }) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-1 flex-row rounded-lg border-[1px] border-gray-400 p-2 md:ml-2">
+      <div className="flex flex-1 flex-row rounded-[50px] border-[1px] border-gray-400 p-2 shadow-md md:ml-10">
         <div className="relative flex flex-1 flex-col">
           <div className="w-[210px] flex-[0.5]">
             <p className="p-[2px] text-center text-xl font-bold text-gray-600">
-              Pending Quotes
+              Pending Invoices
             </p>
             <div className="h-[1px] w-full bg-gray-400 px-3" />
           </div>

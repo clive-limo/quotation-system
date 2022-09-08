@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -38,6 +39,7 @@ const Login: FC<Users> = () => {
     const { token } = res;
 
     if (token) {
+      setCookie('authToken', token);
       router.push('/home');
     }
     setLoginClicked(!loginClicked);
@@ -45,11 +47,11 @@ const Login: FC<Users> = () => {
 
   return (
     <div className="flex w-full flex-col p-1 md:px-7 md:py-2">
-      <h1 className="mt-10 mb-2 text-justify text-[30px] font-semibold">
+      <h1 className="text-justify text-[30px] font-semibold text-gray-600">
         LOG IN
       </h1>
       <div className="w-full">
-        <p className="py-2 text-[18px]">EMAIL</p>
+        <p className="py-2 text-[18px] text-gray-600">EMAIL</p>
         <input
           className="w-full rounded-sm border-[1px] border-gray-400 px-5 py-2 text-[18px]"
           placeholder="example@gmail.com"
@@ -60,7 +62,7 @@ const Login: FC<Users> = () => {
         />
       </div>
       <div className="w-full">
-        <p className="py-2 text-[18px] ">PASSWORD</p>
+        <p className="py-2 text-[18px] text-gray-600 ">PASSWORD</p>
         <input
           className="w-full rounded-sm border-[1px] border-gray-400 px-5 py-2 text-[18px]"
           type="password"
@@ -74,7 +76,7 @@ const Login: FC<Users> = () => {
       <div className="relative my-8">
         <button
           className={clsx(
-            'absolute right-0  w-[60%] rounded-full p-2 text-center font-semibold text-white',
+            'absolute right-0  w-[40%] rounded-[15px] p-2 text-center font-semibold text-white',
             loginClicked
               ? 'bg-white shadow-md'
               : 'bg-blue-700 hover:bg-blue-900'

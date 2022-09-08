@@ -1,6 +1,9 @@
+import { getCookie } from 'cookies-next';
 import { prisma } from 'lib/prisma';
 import type { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import type { FC } from 'react';
+import { useEffect } from 'react';
 
 import { PagesLayout } from '@/layouts/PagesLayout';
 import InvoiceModule from '@/modules/Invoice';
@@ -32,11 +35,24 @@ interface InvoiceProps {
   }[];
 }
 
-const Invoices: FC<InvoiceProps> = ({ items, quotations, invoices }) => (
-  <PagesLayout>
-    <InvoiceModule items={items} quotations={quotations} invoices={invoices} />
-  </PagesLayout>
-);
+const Invoices: FC<InvoiceProps> = ({ items, quotations, invoices }) => {
+  const router = useRouter();
+  useEffect(() => {
+    const token = getCookie('authToken');
+    if (!token) {
+      router.push('/404');
+    }
+  }, []);
+  return (
+    <PagesLayout>
+      <InvoiceModule
+        items={items}
+        quotations={quotations}
+        invoices={invoices}
+      />
+    </PagesLayout>
+  );
+};
 
 export default Invoices;
 

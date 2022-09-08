@@ -79,7 +79,7 @@ const HomeModule: FC<HomeProps> = ({ customers, quotations, items }) => {
       <div className="h-[20%]">
         <QuotesSummary quotations={quotations} items={items} />
       </div>
-      <div className="mt-[80px] h-[55%] w-full rounded-[50px] border-[1px] border-gray-300 p-2 shadow-lg">
+      <div className="mt-[80px] h-[60%] w-full rounded-[50px] border-[1px] border-gray-300 p-3 shadow-lg">
         <div className="my-[3%] mx-[1%] flex h-[5%] flex-row">
           <p className="my-auto flex-1 px-5 text-3xl font-bold text-gray-600">
             Records

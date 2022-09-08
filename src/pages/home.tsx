@@ -1,6 +1,9 @@
+import { getCookie } from 'cookies-next';
 import { prisma } from 'lib/prisma';
 import type { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import type { FC } from 'react';
+import { useEffect } from 'react';
 
 import { PagesLayout } from '@/layouts/PagesLayout';
 import HomeModule from '@/modules/Home';
@@ -30,6 +33,14 @@ interface HomeProps {
   }[];
 }
 const Home: FC<HomeProps> = ({ customers, quotations, items }) => {
+  const router = useRouter();
+  useEffect(() => {
+    const token = getCookie('authToken');
+    if (!token) {
+      router.push('/404');
+    }
+  }, []);
+
   return (
     <PagesLayout>
       <HomeModule customers={customers} quotations={quotations} items={items} />

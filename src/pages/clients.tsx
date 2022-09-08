@@ -1,6 +1,9 @@
+import { getCookie } from 'cookies-next';
 import { prisma } from 'lib/prisma';
 import type { GetServerSideProps } from 'next';
+import router from 'next/router';
 import type { FC } from 'react';
+import { useEffect } from 'react';
 
 import { PagesLayout } from '@/layouts/PagesLayout';
 import ClientsModule from '@/modules/Clients';
@@ -13,11 +16,19 @@ interface ClientProps {
   }[];
 }
 
-const Clients: FC<ClientProps> = ({ customers }) => (
-  <PagesLayout>
-    <ClientsModule customers={customers} />
-  </PagesLayout>
-);
+const Clients: FC<ClientProps> = ({ customers }) => {
+  useEffect(() => {
+    const token = getCookie('authToken');
+    if (!token) {
+      router.push('/404');
+    }
+  }, []);
+  return (
+    <PagesLayout>
+      <ClientsModule customers={customers} />
+    </PagesLayout>
+  );
+};
 
 export default Clients;
 

@@ -50,7 +50,7 @@ const InvoiceCard: FC<InvoiceCardProps> = ({
   const invoiceNumber = padLeadingZeros(quoteNumber, 4);
 
   return (
-    <div className="my-[.5%] flex h-[18%] w-full flex-row rounded-lg border-[1px] border-gray-400">
+    <div className="flex h-[80px] w-full flex-row border-b-[1px] border-gray-400">
       <p className="my-auto flex-1 text-center">QT{invoiceNumber}</p>
       <p className="my-auto flex-1 text-center text-blue-600">
         {invoiceTotal.toLocaleString('en-US', {

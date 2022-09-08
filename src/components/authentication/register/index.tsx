@@ -74,9 +74,11 @@ const Register: FC = () => {
   };
   return (
     <div className="flex w-full flex-col p-1 md:px-7 md:py-2">
-      <h1 className="text-justify text-[30px] font-semibold">REGISTER</h1>
+      <h1 className="text-justify text-[30px] font-semibold text-gray-600">
+        REGISTER
+      </h1>
       <div className="w-full">
-        <p className="py-1 text-[18px]">EMAIL</p>
+        <p className="py-1 text-[18px] text-gray-600">EMAIL</p>
         <input
           className={clsx(
             'w-full rounded-sm border-[1px] px-5 py-2 text-[18px]',
@@ -91,7 +93,7 @@ const Register: FC = () => {
         />
       </div>
       <div className="w-full">
-        <p className="py-1 text-[18px]">PASSWORD</p>
+        <p className="py-1 text-[18px] text-gray-600">PASSWORD</p>
         <input
           className={clsx(
             'w-full rounded-sm border-[1px] border-gray-500 px-5 py-2 text-[18px]',
@@ -108,7 +110,7 @@ const Register: FC = () => {
         />
       </div>
       <div className="w-full">
-        <p className="py-1 text-[18px]">CONFIRM PASSWORD</p>
+        <p className="py-1 text-[18px] text-gray-600">CONFIRM PASSWORD</p>
         <input
           className={clsx(
             'w-full rounded-sm border-[1px] border-gray-500 px-5 py-2 text-[18px]',
@@ -130,7 +132,7 @@ const Register: FC = () => {
             await handleSubmit(newUser);
           }}
           className={clsx(
-            'absolute right-0  w-[60%] rounded-full p-2 text-center font-semibold text-white',
+            'absolute right-0  w-[40%] rounded-[15px] p-2 text-center font-semibold text-white',
             registerClicked
               ? 'bg-white shadow-md'
               : 'bg-blue-700 hover:bg-blue-900'

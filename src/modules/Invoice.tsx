@@ -37,9 +37,9 @@ const InvoiceModule: FC<InvoiceModuleProps> = ({
 }) => {
   return (
     <div className="h-full w-full overflow-hidden px-[3%]">
-      <div className="h-[15%]">
+      <div className="h-[150px]">
         <p className="my-auto flex-1 py-[0.6%] text-4xl font-bold text-gray-600">
-          Invoices
+          Dashboard
         </p>
         <p className="my-auto flex-1 text-2xl font-normal text-gray-600">
           Summary
@@ -52,12 +52,10 @@ const InvoiceModule: FC<InvoiceModuleProps> = ({
           invoices={invoices}
         />
       </div>
-      <div className="h-[10%] w-full">
-        <p className="py-[1.5%] text-2xl font-normal text-gray-600">
-          Invoice Records
+      <div className="h-[60%] w-full rounded-[50px] border-[1px] border-gray-300 p-3 shadow-md md:mt-[80px]">
+        <p className="px-[2%] py-[3%] text-3xl font-bold text-gray-600">
+          Invoices
         </p>
-      </div>
-      <div className="h-[50%] w-full">
         <InvoiceTable items={items} invoices={invoices} />
       </div>
     </div>

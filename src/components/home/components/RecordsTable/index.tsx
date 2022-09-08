@@ -72,7 +72,7 @@ const RecordTable: FC<RecordsProps> = ({ quotations, items }) => {
   }, [selectedQuote]);
 
   return (
-    <div className="flex h-[76%] w-full flex-row overflow-x-hidden rounded-[50px] border-[1px] border-gray-400">
+    <div className="flex h-[81%] w-full flex-row overflow-x-hidden rounded-[50px] border-[1px] border-gray-400">
       <div className="h-[95%] flex-[5]">
         {/* Title customers */}
         <div className="flex h-[10%] w-full flex-row bg-gray-400">

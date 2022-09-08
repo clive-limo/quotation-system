@@ -21,8 +21,8 @@ interface InvoiceTableProps {
 
 const InvoiceTable: FC<InvoiceTableProps> = ({ items, invoices }) => {
   return (
-    <div className="flex h-full w-full flex-col rounded-lg border-[1px] border-gray-400">
-      <div className="flex h-[10%] w-full flex-row rounded-lg bg-gray-400">
+    <div className="flex h-[80%] w-full flex-col overflow-x-hidden rounded-[50px] border-[1px] border-gray-400">
+      <div className="flex h-[40px] w-full flex-row bg-gray-400">
         <p className=" my-auto flex-1 text-center font-semibold text-blue-500">
           QUOTE N0.
         </p>
@@ -39,7 +39,7 @@ const InvoiceTable: FC<InvoiceTableProps> = ({ items, invoices }) => {
           ACTIONS
         </p>
       </div>
-      <div className="h-[75%] px-[.5%]">
+      <div className="h-[50%]">
         {invoices?.map((invoice) => {
           return (
             <InvoiceCard
